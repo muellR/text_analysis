@@ -1,0 +1,95 @@
+import xgboost as xgb
+import optuna
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import accuracy_score, classification_report
+from sklearn.preprocessing import LabelEncoder
+from scipy.sparse import hstack
+import base
+
+# soll optuna die Hyperparameter erneut optimieren
+calculate_hyperparams = False
+
+# train_df und test_df
+train_df, test_df = base.load_and_split_data()
+
+# Label-Encoding für die Zielspalte
+le = LabelEncoder()
+train_df['label_encoded'] = le.fit_transform(train_df['label'])
+test_df['label_encoded'] = le.transform(test_df['label'])
+
+# TF-IDF-Vektorisierung des Textes
+tfidf = TfidfVectorizer(max_features=5000, ngram_range=(1, 2))
+X_train_text = tfidf.fit_transform(train_df['text_'])
+X_test_text = tfidf.transform(test_df['text_'])
+
+# Numerische Features
+X_train_num = train_df[['rating']].values
+X_test_num = test_df[['rating']].values
+
+# Kombiniere numerische und Text-Features
+X_train = hstack([X_train_num, X_train_text])
+X_test = hstack([X_test_num, X_test_text])
+
+y_train = train_df['label_encoded']
+y_test = test_df['label_encoded']
+
+
+# Optuna Objective Function
+def objective(trial):
+    param = {
+        'verbosity': 0,
+        'objective': 'binary:logistic',
+        'eval_metric': 'logloss',
+        'tree_method': 'hist',
+        'booster': 'gbtree',
+        'max_depth': trial.suggest_int('max_depth', 3, 10),
+        'learning_rate': trial.suggest_float('learning_rate', 0.01, 0.3, log=True),
+        'subsample': trial.suggest_float('subsample', 0.5, 1.0),
+        'colsample_bytree': trial.suggest_float('colsample_bytree', 0.5, 1.0),
+        'gamma': trial.suggest_float('gamma', 0, 5),
+        'lambda': trial.suggest_float('lambda', 1e-3, 10.0, log=True),
+        'alpha': trial.suggest_float('alpha', 1e-3, 10.0, log=True),
+        'min_child_weight': trial.suggest_int('min_child_weight', 1, 10)
+    }
+
+    # Split für Cross-Validation
+    X_tr, X_val, y_tr, y_val = train_test_split(X_train, y_train, test_size=0.2, random_state=42)
+
+    model = xgb.XGBClassifier(**param)
+    model.fit(X_tr, y_tr, eval_set=[(X_val, y_val)], verbose=False)
+    preds = model.predict(X_val)
+    acc = accuracy_score(y_val, preds)
+    return acc
+
+
+if calculate_hyperparams:
+    # Hyperparameter-Tuning
+    study = optuna.create_study(direction='maximize')
+    study.optimize(objective, n_trials=30)
+
+    # Berechnete beste Hyperparameter
+    best_params = study.best_params
+else:
+    # Manuell gesetzte Hyperparameter (aus früherer Optimierung mit Optuna)
+    best_params = {'max_depth': 10,
+                   'learning_rate': 0.2966627365806858,
+                   'subsample': 0.9375892407928443,
+                   'colsample_bytree': 0.8169424111982259,
+                   'gamma': 3.655134647675474,
+                   'lambda': 0.1407520017524045,
+                   'alpha': 0.36057611649921273,
+                   'min_child_weight': 6}
+best_params.update({
+    'objective': 'binary:logistic',
+    'eval_metric': 'logloss',
+    'tree_method': 'hist'
+})
+
+final_model = xgb.XGBClassifier(**best_params)
+final_model.fit(X_train, y_train)
+
+# Evaluation auf Testdaten
+y_pred = final_model.predict(X_test)
+report = classification_report(y_test, y_pred, target_names=le.classes_)
+print("Classification Report:\n", report)
