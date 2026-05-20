@@ -6,9 +6,11 @@
 
 import base
 import pandas as pd
+import os
+import numpy as np
 
 train_df, test_df = pd, pd
-train_df, test_df = base.load_and_split_data()
+train_df, test_df = base.load_and_split_data(b_add_embeddings=True)
 
 print(train_df.head())
 print(test_df.head())
