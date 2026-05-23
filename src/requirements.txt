@@ -1,0 +1,12 @@
+kagglehub>=1.0.1
+numpy
+optuna
+pandas
+scikit-learn
+scipy
+sentence-transformers
+torch
+tqdm
+transformers
+xgboost
+openai
