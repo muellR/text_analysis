@@ -3,7 +3,9 @@
 *.bkp
 ~$*
 
-generated/
+fccn*
+
+figures/
 
 # macOS
 .DS_Store
