@@ -6,6 +6,7 @@ from sklearn.model_selection import train_test_split
 import numpy as np
 import warnings
 warnings.filterwarnings("ignore")
+import matplotlib.pyplot as plt
 
 
 # Ordner-Pfade
@@ -20,6 +21,11 @@ models_dir = os.path.abspath(os.path.join(base_dir, '..', 'generated', 'models')
 # Funktion um Ordner-Pfade neu zu erstellen
 # ─────────────────────────────────────────────
 def reinitialize_folders(folders, drop_existing=False):
+    # prüfen, ob folders eine Liste ist, wenn nicht, in eine Liste umwandeln
+    # sonst macht es für jeden Buchstaben im String einen Ordner, was nicht gewollt ist
+    if not isinstance(folders, list):
+        folders = [folders]
+
     for p in folders:
         if Path(p).exists() and drop_existing:
             shutil.rmtree(p)
@@ -29,17 +35,30 @@ def reinitialize_folders(folders, drop_existing=False):
 # ─────────────────────────────────────────────
 # Daten laden und splitten in Train und Test
 # ─────────────────────────────────────────────
-def load_and_split_data(b_add_embeddings=False):
-    df = pd.read_csv(os.path.join(resources_dir, "fake reviews dataset.csv"))
+def load_and_split_data(s_file_name="fake reviews dataset.csv"):
+    df = pd.read_csv(os.path.join(resources_dir, s_file_name))
 
-    if b_add_embeddings:
-        df = add_embeddings(df)
+    # one-hot encoding für category
+    df = pd.get_dummies(df, columns=['category'], dtype=float)
+
+    # die Spalte "label" in 0=Fake und 1=Real umwandeln
+    df['label'] = df['label'].map({'OR': 1, 'CG': 0})
+
+    # die Spalte rating normalisieren (0-1)
+    df['rating_norm'] = (df['rating'] - 1) / 4
+
+    # wenn es das Feld sentiment gibt, dann normalisieren (0-1)
+    if 'sentiment' in df.columns:
+        df['sentiment'] = (df['sentiment'] - 1) / 4
+
+    # text_ in Vektoren umwandeln und an df anhängen
+    df = add_embeddings(df)
 
     train_df, test_df = train_test_split(
         df,
         test_size=0.2,
         random_state=42,
-        stratify=df["label"]
+        stratify=df["label"] # stratify nach label, damit die Verteilung in Train und Test gleich ist
     )
 
     return train_df.reset_index(drop=True), test_df.reset_index(drop=True)
@@ -87,3 +106,31 @@ def add_embeddings(df):
     df = pd.concat([df, pd.DataFrame(embeddings, index=df.index, columns=embedding_cols)], axis=1)
     print(df.shape)
     return df
+
+
+
+
+# 🔧 Define a helper function to plot learning curves
+def plot_learning_curves(history):
+    fig, axs = plt.subplots(1,2, figsize=(12,4))
+    ax = axs[0]
+    ax.plot(history.history['loss'], label="training")
+    if history.history.get('val_loss') is not None:
+        ax.plot(history.history['val_loss'], label="validation")
+    ax.set_title('model loss')
+    ax.set_ylabel('loss')
+    ax.set_xlabel('epoch')
+    ax.legend()
+    ax.grid()
+
+    ax = axs[1]
+    ax.plot(history.history['accuracy'], label="training")
+    if history.history.get('val_accuracy') is not None:
+        ax.plot(history.history['val_accuracy'], label="validation")
+    ax.set_title('model accuracy')
+    ax.set_ylabel('accuracy')
+    ax.set_xlabel('epoch')
+    ax.legend()
+    ax.grid()
+
+    return fig
