@@ -5,7 +5,6 @@
 #   Option: Zusätliches Lernen mit abgeleitetem Sentiment und Vergleich der beiden outcomes
 
 import base
-import json
 import pandas as pd
 import numpy as np
 import pickle
