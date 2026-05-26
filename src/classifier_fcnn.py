@@ -28,10 +28,10 @@ b_early_stopping = True # if true, use EarlyStopping callback to prevent overfit
 # Daten laden und splitten --> 2 Varianten: mit oder ohne Sentiment als Feature
 train_df, test_df = pd, pd
 if 1==2:
-    s_praefix = "model_02"
+    s_praefix = "class_fcnn"
     train_df, test_df = base.load_and_split_data(s_file_name='fake reviews dataset.csv')
 else:
-    s_praefix = "model_02_with_sentiment"
+    s_praefix = "class_fcnn_with_sentiment"
     train_df, test_df = base.load_and_split_data(s_file_name='fake reviews dataset_senti.csv')
 
 if b_early_stopping:
@@ -90,18 +90,18 @@ x = BatchNormalization()(x)
 x = Dropout(0.2)(x)
 
 output = Dense(1, activation='sigmoid')(x)
-model_02 = keras.Model(input, output)
+class_fcnn = keras.Model(input, output)
 
 # compile model and initialize weights
 adam = optimizers.Adam()
-model_02.compile(loss='binary_crossentropy',
+class_fcnn.compile(loss='binary_crossentropy',
               optimizer=adam,
               metrics=['accuracy'])
 
 
 
 # summarize the model
-model_02.summary()
+class_fcnn.summary()
 
 
 
@@ -109,7 +109,7 @@ model_02.summary()
 if b_init or not os.path.exists(os.path.join(base.models_dir, s_praefix + '.keras')):
     
     if b_early_stopping:
-        history = model_02.fit(X_train, Y_train,
+        history = class_fcnn.fit(X_train, Y_train,
             batch_size=512,
             epochs=50,
             verbose=0,
@@ -117,7 +117,7 @@ if b_init or not os.path.exists(os.path.join(base.models_dir, s_praefix + '.kera
             callbacks=[early_stopping, checkpoint]
             )
     else:
-        history = model_02.fit(X_train, Y_train,
+        history = class_fcnn.fit(X_train, Y_train,
             batch_size=512,
             epochs=50,
             verbose=0,
@@ -125,12 +125,12 @@ if b_init or not os.path.exists(os.path.join(base.models_dir, s_praefix + '.kera
             )
  
     # Model / history speichern
-    model_02.save(os.path.join(base.models_dir, s_praefix + '.keras'))
+    class_fcnn.save(os.path.join(base.models_dir, s_praefix + '.keras'))
     with open(os.path.join(base.models_dir, s_praefix + '_history.pkl'), 'wb') as f:
         pickle.dump(history, f)
 else:
     # load model from file
-    model_02 = keras.models.load_model(os.path.join(base.models_dir, s_praefix + '.keras'))
+    class_fcnn = keras.models.load_model(os.path.join(base.models_dir, s_praefix + '.keras'))
     with open(os.path.join(base.models_dir, s_praefix + '_history.pkl'), 'rb') as f:
         history = pickle.load(f)
 
@@ -149,7 +149,7 @@ fig.savefig(os.path.join(base.figures_dir, s_praefix + '_learning_curves.png'), 
 
 # Auswertung des Modells auf dem Testset
 # predict each instance of the testset
-pred = model_02.predict(X_val)
+pred = class_fcnn.predict(X_val)
 pred_classes = (pred > 0.5).astype(int)
 
 # get confusion matrix
