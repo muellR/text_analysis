@@ -4,6 +4,8 @@ import torch.nn.functional as F
 import pandas as pd
 from torch.utils.data import DataLoader, Dataset
 from tqdm import tqdm
+import os
+import base
 
 model_name = "nlptown/bert-base-multilingual-uncased-sentiment"
 tokenizer = AutoTokenizer.from_pretrained(model_name)
@@ -59,8 +61,11 @@ def analyse_sentiment_batch(df: pd.DataFrame, text_col: str, batch_size: int = 3
     return df
 
 # Verwendung
-df = pd.read_csv("MAS/text_analysis/resources/fake reviews dataset.csv")#.head(100)  # Beispiel: nur die ersten 100 Zeilen analysieren
+s_input = os.path.join(base.resources_dir, 'fake reviews dataset.csv')
+s_output = os.path.join(base.resources_dir, 'fake reviews dataset_senti.csv')
+
+df = pd.read_csv(s_input)#.head(100)  # Beispiel: nur die ersten 100 Zeilen analysieren
 df_result = analyse_sentiment_batch(df, text_col="text_", batch_size=32)
-df_result.to_csv("MAS/text_analysis/resources/fake reviews dataset_senti.csv", index=False)
+df_result.to_csv(s_output, index=False)
 
 print("done")
