@@ -76,10 +76,19 @@ X_val = test_df[feature_cols].values
 Y_val = test_df['label'].values
 
 
+# TEST standardisieren der Features
+# from sklearn.preprocessing import StandardScaler
+# scaler = StandardScaler()
+# X_train = scaler.fit_transform(X_train)
+# X_val = scaler.transform(X_val)
+
+
+
+
 # fully connected neural network with moderate dropout
 input = keras.Input(shape=(X_train.shape[1],))
 
-# x = Dense(512, activation='relu')(input)
+# x = Dense(512, activation='gelu')(input)
 # x = Dropout(0.2)(x) # weniger Dropout bei SBERT
 x = Dense(256, activation='gelu')(input) # gelu > relu für Embeddings
 x = BatchNormalization()(x)
@@ -87,6 +96,8 @@ x = Dropout(0.2)(x) # weniger Dropout bei SBERT
 x = Dense(128, activation='gelu')(x)
 x = BatchNormalization()(x)
 x = Dropout(0.2)(x)
+
+
 
 output = Dense(1, activation='sigmoid')(x)
 class_fcnn = keras.Model(input, output)
