@@ -12,7 +12,7 @@ import matplotlib.pyplot as plt
 # Ordner-Pfade
 base_dir = os.path.dirname(os.path.abspath(__file__))
 resources_dir = os.path.abspath(os.path.join(base_dir, '..', 'resources'))
-tmp_dir = os.path.abspath(os.path.join(base_dir, '..', 'generated', 'tmp'))
+predictions_dir = os.path.abspath(os.path.join(base_dir, '..', 'generated', 'predictions'))
 figures_dir = os.path.abspath(os.path.join(base_dir, '..', 'generated', 'figures'))
 models_dir = os.path.abspath(os.path.join(base_dir, '..', 'generated', 'models'))
 
@@ -32,9 +32,9 @@ def reinitialize_folders(folders, drop_existing=False):
         Path(p).mkdir(parents=True, exist_ok=True)
 
 
-# ─────────────────────────────────────────────
-# Daten laden und splitten in Train und Test
-# ─────────────────────────────────────────────
+# ─────────────────────────────────────────────────────────
+# Daten laden und splitten in Train und Test mit Embeddings
+# ─────────────────────────────────────────────────────────
 def load_and_split_data(s_file_name="fake reviews dataset.csv"):
     df = pd.read_csv(os.path.join(resources_dir, s_file_name))
 
@@ -53,6 +53,25 @@ def load_and_split_data(s_file_name="fake reviews dataset.csv"):
 
     # text_ in Vektoren umwandeln und an df anhängen
     df = add_embeddings(df)
+
+    train_df, test_df = train_test_split(
+        df,
+        test_size=0.2,
+        random_state=42,
+        stratify=df["label"] # stratify nach label, damit die Verteilung in Train und Test gleich ist
+    )
+
+    return train_df.reset_index(drop=True), test_df.reset_index(drop=True)
+
+
+# ─────────────────────────────────────────────
+# Daten laden und splitten in Train und Test
+# ─────────────────────────────────────────────
+def load_and_split_data_raw(s_file_name="fake reviews dataset.csv"):
+    df = pd.read_csv(os.path.join(resources_dir, s_file_name))
+
+    # IDs erzeugen für spätere Identifikation der falsch deklarierten
+    df["id"] = range(1, len(df) + 1)
 
     train_df, test_df = train_test_split(
         df,

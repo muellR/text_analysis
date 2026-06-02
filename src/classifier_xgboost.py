@@ -1,5 +1,7 @@
 import xgboost as xgb
 import optuna
+import os
+import pandas as pd
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score, classification_report
@@ -11,7 +13,7 @@ import base
 calculate_hyperparams = False
 
 # train_df und test_df
-train_df, test_df = base.load_and_split_data()
+train_df, test_df = base.load_and_split_data_raw()
 
 # Label-Encoding für die Zielspalte
 le = LabelEncoder()
@@ -93,3 +95,27 @@ final_model.fit(X_train, y_train)
 y_pred = final_model.predict(X_test)
 report = classification_report(y_test, y_pred, target_names=le.classes_)
 print("Classification Report:\n", report)
+
+# Falsch und korrekt klassifizierte Datensätze je in ein File schreiben
+correct_mask = (y_pred == y_test.values)
+wrong_mask = ~correct_mask
+correct_df = test_df.loc[correct_mask].sort_values("id")
+wrong_df = test_df.loc[wrong_mask].sort_values("id")
+base.reinitialize_folders(base.predictions_dir, drop_existing=False)
+correct_df.to_csv(os.path.join(base.predictions_dir, "correct_predictions_xgboost.csv"), index=False)
+wrong_df.to_csv(os.path.join(base.predictions_dir, "wrong_predictions_xgboost.csv"), index=False)
+print("Path to predictions:", base.resources_dir)
+
+# Top Features ausgeben
+text_features = tfidf.get_feature_names_out()
+num_features = ["rating"]
+all_features = list(num_features) + list(text_features)
+booster = final_model.get_booster()
+importance = booster.get_score(importance_type="gain")
+importance_df = pd.DataFrame({
+    "feature": [all_features[int(k[1:])] for k in importance.keys()],
+    "importance": list(importance.values())
+})
+importance_df = importance_df.sort_values("importance", ascending=False)
+print("\nTop Features:")
+print(importance_df.head(20))
