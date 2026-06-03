@@ -14,7 +14,7 @@ import pandas as pd
 calculate_hyperparams = False
 
 # train_df und test_df
-train_df, test_df = base.load_and_split_data_raw()
+train_df, test_df = base.load_and_split_data()
 
 # Label-Encoding für die Zielspalte
 le = LabelEncoder()

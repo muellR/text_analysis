@@ -22,19 +22,37 @@ from keras import optimizers
 from keras.callbacks import EarlyStopping, ModelCheckpoint
 
 b_init = True # if false, do not force Model regeneration, but load existing model if it exists
-b_early_stopping = True # if true, use EarlyStopping callback to prevent overfitting and save best model
+
 
 # Daten laden und splitten --> 2 Varianten: mit oder ohne Sentiment als Feature
 train_df, test_df = pd, pd
-if 1==2:
+if 1==1:
     s_praefix = "class_fcnn"
     train_df, test_df = base.load_and_split_data(s_file_name='fake reviews dataset.csv')
 else:
     s_praefix = "class_fcnn_with_sentiment"
     train_df, test_df = base.load_and_split_data(s_file_name='fake reviews dataset_senti.csv')
 
-if b_early_stopping:
-    s_praefix += '_early_stopping'
+
+
+# one-hot encoding für category
+train_df = pd.get_dummies(train_df, columns=['category'], dtype=float)
+
+# die Spalte "label" in 0=Fake und 1=Real umwandeln
+train_df['label'] = train_df['label'].map({'OR': 1, 'CG': 0})
+test_df['label'] = test_df['label'].map({'OR': 1, 'CG': 0})
+
+# die Spalte rating normalisieren (0-1)
+train_df['rating_norm'] = (train_df['rating'] - 1) / 4
+
+# wenn es das Feld sentiment gibt, dann normalisieren (0-1)
+if 'sentiment' in train_df.columns:
+    train_df['sentiment'] = (train_df['sentiment'] - 1) / 4
+
+# text_ in Vektoren umwandeln und an df anhängen
+train_df = base.add_embeddings(train_df)
+
+
 
 
 print(train_df.shape)
@@ -118,22 +136,14 @@ class_fcnn.summary()
 # train the model
 if b_init or not os.path.exists(os.path.join(base.models_dir, s_praefix + '.keras')):
     
-    if b_early_stopping:
-        history = class_fcnn.fit(X_train, Y_train,
-            batch_size=512,
-            epochs=50,
-            verbose=0,
-            validation_data=(X_val, Y_val),
-            callbacks=[early_stopping, checkpoint]
-            )
-    else:
-        history = class_fcnn.fit(X_train, Y_train,
-            batch_size=512,
-            epochs=50,
-            verbose=0,
-            validation_data=(X_val, Y_val)
-            )
- 
+    history = class_fcnn.fit(X_train, Y_train,
+        batch_size=512,
+        epochs=50,
+        verbose=0,
+        validation_data=(X_val, Y_val),
+        callbacks=[early_stopping, checkpoint] # use EarlyStopping callback to prevent overfitting and save best model
+        )
+
     # Model / history speichern
     class_fcnn.save(os.path.join(base.models_dir, s_praefix + '.keras'))
     with open(os.path.join(base.models_dir, s_praefix + '_history.pkl'), 'wb') as f:

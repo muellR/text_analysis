@@ -35,7 +35,7 @@ def reinitialize_folders(folders, drop_existing=False):
 # ─────────────────────────────────────────────────────────
 # Daten laden und splitten in Train und Test mit Embeddings
 # ─────────────────────────────────────────────────────────
-def load_and_split_data(s_file_name="fake reviews dataset.csv"):
+def load_and_split_data_old(s_file_name="fake reviews dataset.csv"):
     df = pd.read_csv(os.path.join(resources_dir, s_file_name))
 
     # one-hot encoding für category
@@ -67,7 +67,7 @@ def load_and_split_data(s_file_name="fake reviews dataset.csv"):
 # ─────────────────────────────────────────────
 # Daten laden und splitten in Train und Test
 # ─────────────────────────────────────────────
-def load_and_split_data_raw(s_file_name="fake reviews dataset.csv"):
+def load_and_split_data(s_file_name="fake reviews dataset.csv"):
     df = pd.read_csv(os.path.join(resources_dir, s_file_name))
 
     # IDs erzeugen für spätere Identifikation der falsch deklarierten
