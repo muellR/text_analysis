@@ -5,7 +5,7 @@
 
 fccn*
 
-figures/
+#figures/
 
 # macOS
 .DS_Store
