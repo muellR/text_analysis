@@ -104,7 +104,7 @@ wrong_df = test_df.loc[wrong_mask].sort_values("id")
 base.reinitialize_folders(base.predictions_dir, drop_existing=False)
 correct_df.to_csv(os.path.join(base.predictions_dir, "correct_predictions_xgboost.csv"), index=False)
 wrong_df.to_csv(os.path.join(base.predictions_dir, "wrong_predictions_xgboost.csv"), index=False)
-print("Path to predictions:", base.resources_dir)
+print("Path to predictions:", base.predictions_dir)
 
 # Top Features ausgeben
 text_features = tfidf.get_feature_names_out()

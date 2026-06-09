@@ -1,0 +1,395 @@
+id,category,rating,label,text_,class_fcnn_bge,random_forest,xgboost,correct_count,ensemble_vote
+14,Home_and_Kitchen_5,1.0,CG,These are so flimsy! They are not the quality you would expect from a piece of furniture.,0,0,0,0,0
+142,Home_and_Kitchen_5,1.0,CG,"Terrible, complete waste of money. Not a whole lot to say.",0,0,0,0,0
+218,Home_and_Kitchen_5,5.0,CG,Great Seller. Item just like it.Great quality and just what I needed for my kitchen! ,0,0,0,0,0
+307,Home_and_Kitchen_5,5.0,CG,Beautiful shower curtain. Just what I wanted. Looks good in my bathroom.,0,0,0,0,0
+315,Home_and_Kitchen_5,5.0,CG,unpacked and used as soon as it arrived.  I was a little surprised how well this one,0,0,0,0,0
+461,Home_and_Kitchen_5,5.0,OR,This product is sturdy and has a nice design.  Will last and last.,0,0,0,0,0
+514,Home_and_Kitchen_5,5.0,CG,"Without having to use the spout, the spout is a nice piece of equipment.",0,0,0,0,0
+724,Home_and_Kitchen_5,1.0,CG,Not as described. Not what I expected. Not what I wanted.,0,0,0,0,0
+751,Home_and_Kitchen_5,4.0,CG,"Not super powerful. Creates a nice, suction-free surface.",0,0,0,0,0
+957,Home_and_Kitchen_5,5.0,CG,"great brushes, I wind up using a whole bunch of these for all kinds of things.",0,0,0,0,0
+965,Home_and_Kitchen_5,5.0,CG,It runs quiet and eliminated some of the noise we've heard in our bedroom. I'm not sure how,0,0,0,0,0
+1072,Home_and_Kitchen_5,5.0,CG,"Beautiful color, really brightened up my room and the curtains are very soft.",0,0,0,0,0
+1080,Home_and_Kitchen_5,2.0,CG,Serious off-gassing!!! ugh!  Not only do you have to clean the area around the,0,0,0,0,0
+1119,Home_and_Kitchen_5,4.0,OR,"This is a nice little lamp, but the color in the picture is not accurate; it is not purple, it is fuschia.",0,0,0,0,0
+1547,Home_and_Kitchen_5,5.0,CG,"I can't wait to see what happens when the ice gets too cold.Nice, sturdy, and functional.  Great for the price. ",0,0,0,0,0
+1555,Home_and_Kitchen_5,4.0,CG,everything is great. no more bulky suction cups. My husband likes it too!  It is so easy to use.,0,0,0,0,0
+3727,Home_and_Kitchen_5,4.0,CG,"The AVEX Brew Pint Glass, Stainless Steel, Comes With a Manual Instructions Manual for Brew Pint Glass. The AVEX Brew Pint Glass, Stainless Steel, Comes With a Manual Instructions Manual for Brew Pint Glass. The AVEX Brew Pint Glass, Stainless Steel, Comes With a Manual Instructions Manual for Brew Pint Glass. The AVEX Brew Pint Glass, Stainless Steel, Comes With a Manual Instructions Manual for Brew Pint Glass. The AVEX Brew Pint Glass, Stainless Steel, Comes With a Manual Instructions Manual for Brew Pint Glass. The AVEX Brew Pint Glass, Stainless Steel, Comes With a Manual Instructions Manual for Brew Pint Glass. The AVEX Brew Pint Glass, Stainless Steel, Comes With a Manual Instructions Manual for Brew Pint Glass.",0,0,0,0,0
+4073,Sports_and_Outdoors_5,5.0,CG,Great Tool to add to your EDC. Easy to use and make a difference.,0,0,0,0,0
+4079,Sports_and_Outdoors_5,5.0,CG,"Good light for night sporting, hiking or camping.  Easy to adjust and turn up the volume and",0,0,0,0,0
+4158,Sports_and_Outdoors_5,5.0,CG,"Never give your camelback to a friend, let them ride for a while, just in case.",0,0,0,0,0
+4161,Sports_and_Outdoors_5,5.0,CG,Great reception. Easy to tune and set up. Great value for the money.This is a great,0,0,0,0,0
+4209,Sports_and_Outdoors_5,4.0,OR,Used it for the first time yesterday and it worked great.,0,0,0,0,0
+4269,Sports_and_Outdoors_5,5.0,CG,Good and efective at 50% off.  Great value for the money!This is a,0,0,0,0,0
+4349,Sports_and_Outdoors_5,5.0,CG,This lure does entice strikes.  I have an old reel that came with this lure and I,0,0,0,0,0
+4357,Sports_and_Outdoors_5,5.0,CG,This works faster and with more effort you can get a good grip on your rifle.Very nice.,0,0,0,0,0
+4374,Sports_and_Outdoors_5,2.0,CG,Meh.  Was a much better fit than the knee pads I had on my knee. ,0,0,0,0,0
+4454,Sports_and_Outdoors_5,5.0,CG,I use these to count the number of pieces of clothing I have left for my family.,0,0,0,0,0
+4666,Sports_and_Outdoors_5,3.0,CG,i guess yiu get what i paid for.  i've got a lot of bikes and one,0,0,0,0,0
+4675,Sports_and_Outdoors_5,5.0,CG,"Totally does the job, keeps my hands free and keeps my wrist warm.",0,0,0,0,0
+4722,Sports_and_Outdoors_5,5.0,CG,"Item as advertised, fast shipping.  I received the product in good condition and my expectations were met",0,0,0,0,0
+4733,Sports_and_Outdoors_5,3.0,CG,o. k. but could have saved some money by shipping it in a carrier.,0,0,0,0,0
+4865,Sports_and_Outdoors_5,5.0,CG,"muchas gracias, compre desde Venezuela, ancien suo de las m",0,0,0,0,0
+5104,Sports_and_Outdoors_5,5.0,CG,Under Armour clothes are always better than the ones you buy for your backpacking trip. I ordered the 32 oz.,0,0,0,0,0
+5117,Sports_and_Outdoors_5,5.0,CG,Awesome!  Use it when hiking or camping.  Easy to use and make a difference!  Works as advertised,0,0,0,0,0
+5726,Sports_and_Outdoors_5,5.0,CG,"This skull cap did what it was designed to do. It did not make my head itch, but it did not make my skin look like it was chapped.",0,0,0,0,0
+5800,Sports_and_Outdoors_5,5.0,OR,This is a Beautiful little knife. The fit and finish is great and it is so small you forget your carrying it. Love this blade. It is a shame they discontinued this chairman series.,0,0,0,0,0
+5952,Sports_and_Outdoors_5,5.0,CG,"These bands are amazing. My son has them on and off for a lot of practice. He has been using them for the past month, and they're still holding up.",0,0,0,0,0
+8649,Electronics_5,5.0,CG,Still going strong in 2014. I'm hoping to add another one soon.,0,0,0,0,0
+8688,Electronics_5,5.0,CG,"Arrived quickly, works fine. Not a big deal.Wanted a full sized USB drive for",0,0,0,0,0
+8781,Electronics_5,5.0,OR,The Nikon D40X is the camera that I have. This item replaced the cap I lost. It was a perfect fit.,0,0,0,0,0
+8961,Electronics_5,5.0,OR,I've been using these for a few weeks now and I have had no problems. The build quality is very good on these.,0,0,0,0,0
+9060,Electronics_5,5.0,CG,"Excellent antenna,  strong magnet,  strong cable.  Easy to install.  Great product!  Works as advertised.",0,0,0,0,0
+9198,Electronics_5,5.0,OR,"It works really great as it is a replacement for an old Walkman. My wife loves and it sounds amazingly good. the radio is pretty good, too.",0,0,0,0,0
+9442,Electronics_5,5.0,CG,Good HDMI cables to hook up to the TV and you can't go wrong with this!  The cables are sturdy and the fit is solid.,0,0,0,0,0
+9666,Electronics_5,5.0,CG,Great camera backpack. I wanted something to carry with me in the car or my bag. I just wanted a pair of ear buds. The Bose is the perfect fit.,0,0,0,0,0
+10711,Electronics_5,3.0,CG,"My wireless connection drops from about 20 feet to about 15 feet.  This is a major issue.  If you are trying to run a wireless network through a wall, you should go to the router and look at the Bluetooth device.  Otherwise, if you are using the device for the web browsing, it's a huge issue.  If you have a router that is really capable of handling",0,0,0,0,0
+11132,Electronics_5,5.0,OR,"This is the best bluetooth keyboard I have ever used. I have one for an ipad mini and it is very durable and works very well. I have no problem with it connecting to my ipad. I don't have to worry about dropping it, (I dropped it a few weeks ago and the case I had on it protected it, but the case broke) that's why I decided to get a more durable case and had always wished I could type like a lap top. It does add some weight to the ipad, but it is worth the weigh for the protection and usage. I love it and would recommend it to anyone.",0,0,0,0,0
+11636,Electronics_5,5.0,CG,"This CD Manual Disc Repair (CDR) Manual Manual Manual
+
+The CD Manual Manual Manual Manual is an excellent DVD repair manual, designed to help you understand the process of how to properly repair a CD. It contains a detailed, thorough description of the process of setting up CD-ROM drives, including how to format the CD, which CD-ROM discs to format, how to use CD-ROM drives to format, how to format CD-ROM discs to format, how to format CD-ROM discs to format, how to format CD-ROM discs to format, how to format CD-ROM discs to format, how to format CD-ROM discs to format, how to format CD-ROM discs to format, how to format CD-ROM discs to format, how to format CD-ROM discs to format, how to format CD-ROM discs to format, how to format CD-ROM discs to format, how to format CD-ROM discs to format, how to format CD-ROM",0,0,0,0,0
+12081,Movies_and_TV_5,4.0,CG,"Another great movie by Russell Crowe, with a twist of a plot that makes the viewer believe he",0,0,0,0,0
+12196,Movies_and_TV_5,5.0,OR,"Although Two Gladiators is a little better, this one is good also.",0,0,0,0,0
+12227,Movies_and_TV_5,5.0,CG,"Awesome series, I've watched it more than once.  I've also watched it a dozen times",0,0,0,0,0
+12358,Movies_and_TV_5,4.0,CG,Esther Williams movies are always better than the ones we watch them in.,0,0,0,0,0
+12507,Movies_and_TV_5,4.0,CG,Good show.  Did not find it entertaining.  Not for children.  Would not recommend.,0,0,0,0,0
+12597,Movies_and_TV_5,5.0,CG,Share a childhood favorite with this movie and let us know what you think!This movie was one of,0,0,0,0,0
+12620,Movies_and_TV_5,5.0,CG,"when you can make life better.)
+
+Waking the Dead
+
+This movie was one of",0,0,0,0,0
+12736,Movies_and_TV_5,5.0,OR,I love the story I love the action I love the Captain America cameo very good movie 5 out of 5,0,0,0,0,0
+12795,Movies_and_TV_5,4.0,CG,"Really enjoying this. Characters continue to grow and mature as they continue to grow, and the story continues to expand",0,0,0,0,0
+12851,Movies_and_TV_5,5.0,CG,Great for grown ups kids and a whole bunch of fun for adults.greatThis movie was one of the worst movie,0,0,0,0,0
+13066,Movies_and_TV_5,5.0,CG,"Funny, cute, charming. with a real heart. Not for children. Like the other children.",0,0,0,0,0
+13121,Movies_and_TV_5,4.0,CG,"Good movie if you like old movies and movies about magic.  Also, if you like old movies and movies about the occult, then",0,0,0,0,0
+13225,Movies_and_TV_5,5.0,CG,"EX-cellent; truly excellent:  well-produced, well acted. Highly recommended. Thank you!Very good.",0,0,0,0,0
+13276,Movies_and_TV_5,1.0,CG,Pleeeaaase stop sending those irritating little ones the message that you're either a bigot or a person who doesn't care about the people you,0,0,0,0,0
+13286,Movies_and_TV_5,4.0,CG,i grew up with guys that were suave and funny.  I also enjoyed the way he acted.  I had to watch a few episodes to,0,0,0,0,0
+13436,Movies_and_TV_5,5.0,CG,This is the 4th or 5th season of the Sherlock Holmes series.  The series ran from 1963 to 1966.  The first season aired in the UK and Canada,0,0,0,0,0
+13473,Movies_and_TV_5,4.0,CG,"Nice lead up to a weekend of professional wrestling, which included a lot of actual wrestling action, we get a peek into the minds of the wrestlers themselves as they try to take",0,0,0,0,0
+15567,Movies_and_TV_5,5.0,CG,"The Green Prince  Musicbox (Cisco)
+
+Two-Disc Collection
+
+Disc 1
+
+Disc 2
+
+Disc 3
+
+Disc 4
+
+Disc 5
+
+Disc 6
+
+Disc 7
+
+Disc 8
+
+Disc 9
+
+Disc 10
+
+Disc 11
+
+Disc 12
+
+Disc 13
+
+Disc 14
+
+Disc 15
+
+Disc 16
+
+Disc 17
+
+Disc 18
+
+Disc 19
+
+Disc 20
+
+Disc 21
+
+Disc 22
+
+Disc 23
+
+Disc 24
+
+Disc 25
+
+Disc 26
+
+Disc 27
+
+Disc 28
+
+Disc 29
+
+Disc 30
+
+Disc 31
+
+Disc 32
+
+Disc 33
+
+Disc 34
+
+Disc 35
+
+Disc 36
+
+Disc 37
+
+Disc 38
+
+Disc 39
+
+Disc 40
+
+Disc 41
+
+Disc 42
+
+Disc 43
+
+Disc 44
+
+Disc 45
+
+Disc 46
+
+Disc 47
+
+Disc 48
+
+Disc 49
+
+Disc 50
+
+Disc 51
+
+Disc 52
+
+Disc 53
+
+Disc 54
+
+Disc 55
+
+Disc 56
+
+Disc 57
+
+Disc 58
+
+Disc 59
+
+Disc 60
+
+Disc 61
+
+Disc 62
+
+Disc 63
+
+Disc 64
+
+Disc 65
+
+Disc 66
+
+Disc 67
+
+Disc 68
+
+Disc 69
+
+Disc 70
+
+Disc 71
+
+Disc 72
+
+Disc 73
+
+Disc 74
+
+Disc 75
+
+Disc 76
+
+Disc 77
+
+Disc 78
+
+Disc 79
+
+Disc 80
+
+Disc 81
+
+Disc 82",0,0,0,0,0
+15603,Tools_and_Home_Improvement_5,5.0,CG,"appears to be a well made tool, with a good set of safety glasses, a strong edge",0,0,0,0,0
+15619,Tools_and_Home_Improvement_5,4.0,CG,does as advertised. better than what I expected. We love this saw.,0,0,0,0,0
+15957,Tools_and_Home_Improvement_5,5.0,CG,Quite easy installation. Solar Power (Cordless) is included.  There is a built-,0,0,0,0,0
+15962,Tools_and_Home_Improvement_5,5.0,CG,"Works great!  Very bright, easy to use. Easy to program.",0,0,0,0,0
+15976,Tools_and_Home_Improvement_5,3.0,CG,"Very bright LED light, but not bright enough to see in the dark.",0,0,0,0,0
+15996,Tools_and_Home_Improvement_5,5.0,OR,Great product for the price.  Very bright and the changing colors are great.,0,0,0,0,0
+16025,Tools_and_Home_Improvement_5,2.0,CG,"""Died"" in about one month. I replaced the one in the basement.",0,0,0,0,0
+16044,Tools_and_Home_Improvement_5,4.0,CG,Exactly as I wanted! Can't say enough good things about this tool.,0,0,0,0,0
+16159,Tools_and_Home_Improvement_5,5.0,CG,Thy are great went up and down the hall and they are all nice and bright.,0,0,0,0,0
+16189,Tools_and_Home_Improvement_5,4.0,CG,Appears well made (in comm't that it's an inch longer than a standard toilet seat),0,0,0,0,0
+16295,Tools_and_Home_Improvement_5,5.0,CG,Excellent quality. Watch their promotional videos for more information. Very good quality.,0,0,0,0,0
+16384,Tools_and_Home_Improvement_5,5.0,CG,"You want to see a better picture, you need to take a photo of the entire thing. ",0,0,0,0,0
+16386,Tools_and_Home_Improvement_5,4.0,CG,The Honeywell water cooler has a built in water pressure controller that will control how much water is inside,0,0,0,0,0
+16682,Tools_and_Home_Improvement_5,5.0,OR,"It is powerful and it looks nice.  For the price, you can't beat it.  Recommended.  Easy to install.  Bought two.",0,0,0,0,0
+16921,Tools_and_Home_Improvement_5,5.0,CG,Why would one own any more of these?  Not really.  These work well and are very sturdy.  I've used them on,0,0,0,0,0
+18447,Tools_and_Home_Improvement_5,4.0,CG,It's great (borderline essential) to have an easy way to make sure your work is done properly.  It is so easy to open the door and it is easy to figure out what you are doing.  I have been in the field for years and have learned how to operate the door.  I have used it with a portable ladder and a cordless workhorse.  It has all the tools needed for a very small,0,0,0,0,0
+18893,Tools_and_Home_Improvement_5,3.0,CG,"got tired of the fluorescent lights.  But, these are a nice light for the money.  I'll be buying more.
+
+Update:  I bought two of these bulbs for my family room in the hallway.  They were about the same price as the bulbs in the bathroom and a bit smaller than the bulbs in the upstairs room.  They are a little brighter than the fluorescent lights but still bright enough to see if you're in the hallway.
+
+Update 2:  I bought another one for the master bedroom.  I'm not sure how long it will last but it's nice to have more light at night.  I can't say how long it will last but I'm hoping it",0,0,0,0,0
+19531,Pet_Supplies_5,5.0,CG,"Really has helped with my dog's anxiety.  I've tried other pills, but this one has",0,0,0,0,0
+19568,Pet_Supplies_5,1.0,CG,"Wast of money, didn't hang on to the leash, and I didn't need it.",0,0,0,0,0
+19777,Pet_Supplies_5,5.0,OR,"Puppy loves this you and I love the ""creepy kid laugh"" it does.",0,0,0,0,0
+19884,Pet_Supplies_5,4.0,CG,Cats like them. No idea what they are.We have two dogs and they love this stuff,0,0,0,0,0
+19899,Pet_Supplies_5,2.0,CG,"""MINIMAL"" Attractactant, IF ANY... (Cats are very picky",0,0,0,0,0
+19947,Pet_Supplies_5,5.0,OR,The six squeakers are great.  I think this toy will last a long time!,0,0,0,0,0
+20008,Pet_Supplies_5,5.0,OR,"Great price, great product. My vet says these are very good for my dogs hip problems.",0,0,0,0,0
+20111,Pet_Supplies_5,5.0,CG,This shampoo always makes my dog's skin shiny and shiny again.  This shampoo doesn't just make,0,0,0,0,0
+20337,Pet_Supplies_5,5.0,CG,My dogs keep these on!  They are the best!  My dogs love them!Very nice.,0,0,0,0,0
+20338,Pet_Supplies_5,5.0,CG,My fish really enjoy this food.  It's a good price and my fish seem to like it.,0,0,0,0,0
+20432,Pet_Supplies_5,1.0,CG,for $ 6 dollars I would have given it 5 stars but it's my 2nd order and they're so,0,0,0,0,0
+20693,Pet_Supplies_5,5.0,OR,"My Aussie loves crates, and especially this one. It is well made, large, and easy to clean. He has the best room in the house!",0,0,0,0,0
+20732,Pet_Supplies_5,5.0,CG,My turtles adore these sticks. I use a large size and they fit nicely. My turtles love them.,0,0,0,0,0
+20780,Pet_Supplies_5,3.0,CG,"My cats don't show any interest in the food, which is a shame because my cats are pretty picky and won't eat anything",0,0,0,0,0
+20968,Pet_Supplies_5,5.0,CG,Works great on my dog. She is an aggressive chewer and will turn her nose up at anything she gets in the dish.,0,0,0,0,0
+21114,Pet_Supplies_5,5.0,OR,This is a really good brush. I like the way it retracts and the hair just wipes off of it. I have a Golden Retriever that sheds a lot. It works great.,0,0,0,0,0
+21683,Pet_Supplies_5,5.0,CG,"My dogs love these chews.  They are the best.  My dogs love them too!  They are so soft and absorbant, and they're the perfect size for a dog that's prone to biting. ",0,0,0,0,0
+21909,Pet_Supplies_5,5.0,CG,Adorable and perfect.  Its perfect for my pup to lie down in and play with.  She doesn't move at all and I don't have to worry about her pulling.  This is a great toy and she loves it.I was skeptical about,0,0,0,0,0
+22003,Pet_Supplies_5,5.0,CG,"The cats love this. I'm not sure if the cats are too keen on this, but I'm sure they are. The cats will eat it, but if you don't have a cat that likes to chew on things, I would suggest it.",0,0,0,0,0
+22102,Pet_Supplies_5,5.0,OR,"This is a very good food.  Looking at the Dog Food Advisor website, it is ranked as a 5 star food.  The only problem I had was that it made my puppy a little gassy, but he is prone to tummy problems anyway,per my vet.  I am currently using the wellness core conned puppy food.",0,0,0,0,0
+22218,Pet_Supplies_5,5.0,CG,"I put these on my dog and he started to bark.  I tried to keep him from jumping on them but the leash broke, so I bought the Tuck-a-Tuck.  I still use them on my dog, but I don't see any problem with them.  They work great with",0,0,0,0,0
+23335,Pet_Supplies_5,4.0,CG,"Maybe if you have a dog with a wide mouth you might need to make a small change. I think it's a good idea to have some guidelines when it comes to how much food you should give your dog. Some people think it's ok to give some food to your dog and others say it's ok to give them a treat. If you have a dog with a long mouth or a sensitive stomach, I think that's fine. If you have a dog that's sensitive to eating something that is hard to digest, I'd suggest changing that up a bit. I've found that having a dog with a sensitive stomach is not as important to your dog as having a hard body and to a dog that is sensitive to eating something that is hard to digest. My dog also likes some of the soft treats she gets but she doesn't like the soft ones.",0,0,0,0,0
+23890,Kindle_Store_5,5.0,OR,THIS is a very good second book to the series. I am anxiously waiting for the third.,0,0,0,0,0
+23895,Kindle_Store_5,4.0,CG,"Great series, get totally drawn into it and let's just say it's one of the best reads",0,0,0,0,0
+23922,Kindle_Store_5,3.0,CG,Good for tiny tots. However I find it hard to put down.,0,0,0,0,0
+24118,Kindle_Store_5,5.0,OR,I enjoyed the two stories contained in this book. These are the only books by these authors that I have read.,0,0,0,0,0
+24210,Kindle_Store_5,3.0,OR,"a good book, interesting story, kept my interest.  nothing exceptional, just a good, solid read.  I would recommend this book",0,0,0,0,0
+24320,Kindle_Store_5,4.0,OR,"I am a huge fan of the whole series, they make for and excellent short read and have very unique ideas and concepts.",0,0,0,0,0
+24378,Kindle_Store_5,5.0,CG,"Excellent ideas for everyone no matter what you are looking for.
+
+If you are looking for a fast read, this",0,0,0,0,0
+24396,Kindle_Store_5,4.0,OR,I really enjoyed reading this book and can't wait to read the rest of the series. I loved the characters and the story line.,0,0,0,0,0
+24453,Kindle_Store_5,5.0,CG,"This is a beautiful story.
+
+Well written.
+
+WOW!!!
+
+I just loved this book.
+",0,0,0,0,0
+24736,Kindle_Store_5,5.0,OR,Loved the story and characters. It will keep you entertained and interested in it until the end. The romance and sex is outstanding and the setting is great.,0,0,0,0,0
+24893,Kindle_Store_5,5.0,CG,I wanted to start selling this book and I couldn't wait to start my journey. I'm glad I did.  The book is a good start to,0,0,0,0,0
+25281,Kindle_Store_5,5.0,CG,"Even though not having the time to read the first part of the series, I was excited to read the second part. The second part was also fantastic!
+
+This is a great story",0,0,0,0,0
+25364,Kindle_Store_5,5.0,OR,"I like the plot, I enjoyed the book. The characters are likable and I understood why the female lead acted the way she did because of past hurts. The books was a good length and the ending was satisfying.",0,0,0,0,0
+25944,Kindle_Store_5,5.0,CG,"Levi and Nika! Need I say more?
+
+I loved Nika and her character. She was a strong, confident, loving, compassionate and caring person. She had a strong heart and it was obvious she was in love with Nika.",0,0,0,0,0
+26065,Kindle_Store_5,5.0,CG,"as I was reading I was caught up in the story.
+
+The story starts out with Liam and Sofia finding each other, both with their own personal agendas. They fall in love with each other and are in love with each other for some time. After some time they have a",0,0,0,0,0
+26275,Kindle_Store_5,5.0,CG,"Here we are again with the second part of the series.
+
+The story starts with the hero (as we know him) returning to the small town of Bear Lake after his wife's death.  He is in the process of applying for a job with the local bakery.  He is a man who has lost his",0,0,0,0,0
+26471,Kindle_Store_5,5.0,CG,Kennedy was obsessed with Chopra and his family. His father was a cowboy who had a strong interest in Chopra. Chopra's grandfather was a social worker who worked in a local newspaper. Chopra had no idea that Chopra was a hockey player. Chopra was shocked when Chopra's father found out about Chopra's birth.,0,0,0,0,0
+26700,Kindle_Store_5,5.0,CG,"In The Liar and Other Stories by T. J. Tootree
+
+The Liar and Other Stories by T. J. Tootree
+
+The Liar and Other Stories by T. J. Tootree
+
+The Liar and Other Stories by T. J. Tootree
+
+The Liar and Other Stories by T. J.",0,0,0,0,0
+26900,Kindle_Store_5,5.0,CG,"I'm so happy that Camryn has finally come to terms with her past and is now a full time woman. I know I am, but I am still a complete mess. I can't even begin to describe how much I loved her. Camryn is one of my favorite characters in the entire series. I have read the entire series, and I have not lost a single one of them. I can't wait to read the next installment.I enjoyed this book.",0,0,0,0,0
+28478,Books_5,5.0,CG,Gorgeous artwork.  Great for a book club.  Not for a book club. ,0,0,0,0,0
+28570,Books_5,5.0,CG,"Typical Dresden Files adventure. Fun, suspenseful, and very funny.",0,0,0,0,0
+28576,Books_5,5.0,CG,"As always, Rebus never fails to leave you with a smile.
+
+If you have been",0,0,0,0,0
+28970,Books_5,5.0,CG,"Good easy summer read kind of book, with lots of action and lots of suspense. I just hope she",0,0,0,0,0
+29055,Books_5,5.0,CG,"Love Joe Gunther Books. Well written, well thought out and researched.  This is a must read.",0,0,0,0,0
+29075,Books_5,5.0,CG,Disturbingly creepy in every way!  I couldn't put it down.  I just wanted to go,0,0,0,0,0
+29120,Books_5,5.0,OR,A very good read  that kept my interest and if you enjoy history I recommend this book.  I loved it.,0,0,0,0,0
+29172,Books_5,5.0,CG,"Passionate, loving. One of the best books I've ever read.
+
+If you're looking for",0,0,0,0,0
+29187,Books_5,5.0,CG,"Suspenseful.  When you thought that an entire book could be summed up by one single word, you",0,0,0,0,0
+29374,Books_5,2.0,CG,"Sorry, it's a great concept, but the story isn't what it seems.  I don't think anyone should be",0,0,0,0,0
+29463,Books_5,5.0,CG,"I almost always give Sandford a pass, but I just wasn't as happy with the way he handled the two stories.",0,0,0,0,0
+29643,Books_5,5.0,CG,Very inspiring. I work at a financial firm and have never heard of anyone who did not enjoy the book.  I had to read it before,0,0,0,0,0
+29945,Books_5,5.0,OR,"I have read the the previous books, love the characters and the plots.  I know I won't be disappointed.  Very good author.  It arrived today, Mothers Day, perfect.  Definately recommend.",0,0,0,0,0
+30542,Books_5,5.0,OR,This book was a lot of fun to read. The story line was compelling and his writing style makes this an easy read.  I had a hard time putting it down.  This was my first Greg Iles book and I am now looking forward to reading many more,0,0,0,0,0
+30760,Books_5,5.0,CG,"""The Shambling Guide To New York City"" by John Grisham.
+
+The Shambling Guide To New York City is the most comprehensive and comprehensive book ever written on the subject of urban planning. It covers the most comprehensive and comprehensive of urban planning principles and is the foundation of the",0,0,0,0,0
+31040,Books_5,2.0,CG,"Patterson has marketed his name and his books as a ""dramatic, riveting, and deeply moving read,"" but the reader must also remember that the illustrations are not always as clear as they seem.  It's a shame that this one was not made into a movie.  In fact, if you have read the book, you can be sure that",0,0,0,0,0
+32801,Toys_and_Games_5,5.0,CG,Super Brand New! Great Product!!My daughter loves this!Very cute and easy to use!Very,0,0,0,0,0
+32898,Toys_and_Games_5,5.0,CG,Works good. Makes me happy. Comes with instructions for how to make it.,0,0,0,0,0
+33035,Toys_and_Games_5,4.0,CG,My 2 year old niece loves it and she plays with it all the time.,0,0,0,0,0
+33086,Toys_and_Games_5,5.0,CG,"For the kids who make this game, they love it.  We play it almost every day.",0,0,0,0,0
+33136,Toys_and_Games_5,5.0,OR,Such fun for little girls. Pieces went together great. The detail is nice.,0,0,0,0,0
+33174,Toys_and_Games_5,5.0,CG,"its nice, like the old time ones, but the kids loved it.",0,0,0,0,0
+33249,Toys_and_Games_5,1.0,OR,"Have bought many Nerf guns for my kids, and this has the poorest performance.",0,0,0,0,0
+33251,Toys_and_Games_5,3.0,CG,they tend to inflate not only when you push the handle but also when you move the handle.,0,0,0,0,0
+33288,Toys_and_Games_5,4.0,CG,"the frail makes him look more real, but it is a real shame that he doesn't look like",0,0,0,0,0
+33312,Toys_and_Games_5,5.0,OR,We have had this for years and the kids still love to hop on it.,0,0,0,0,0
+33481,Toys_and_Games_5,5.0,CG,Lightning fast shipping. Excellent customer service. Item was packaged well.,0,0,0,0,0
+33485,Toys_and_Games_5,5.0,CG,"great replacement discs for your old ones, as well. I will say that my kids are pretty good",0,0,0,0,0
+33512,Toys_and_Games_5,5.0,OR,Bought this for a costume for my son. He loved it. Very durable and awesome for any cosplay.,0,0,0,0,0
+33544,Toys_and_Games_5,2.0,CG,This set is very flimsy and broke within a week. I will return this set.,0,0,0,0,0
+33554,Toys_and_Games_5,5.0,CG,Perfect to throw in my kid's birthday cake and make them all love it. I would recommend.,0,0,0,0,0
+33564,Toys_and_Games_5,5.0,OR,My child loves these.  They are very sturdy cardboard.  She loves taking the lids on and off.,0,0,0,0,0
+33595,Toys_and_Games_5,4.0,CG,"That's my biggest beef. Otherwise, it's a very fun game.",0,0,0,0,0
+33697,Toys_and_Games_5,5.0,CG,Even our 6 year old son has been fascinated with these for a long time. I was surprised to find,0,0,0,0,0
+33786,Toys_and_Games_5,5.0,CG,My grandson loves these keys.  He uses them as part of a puzzle for a variety of activities. ,0,0,0,0,0
+33803,Toys_and_Games_5,5.0,OR,"Good quality, great colors.  Very pleased with this puzzle.  It is just the right level of difficulty and fun together",0,0,0,0,0
+33819,Toys_and_Games_5,5.0,OR,"Very pleased with the quality of this cute little train set, the detail and colors makes it a very cute toy train.",0,0,0,0,0
+34407,Toys_and_Games_5,5.0,CG,This floating chip golf island is an amazing design and fun for all ages!  I would recommend this for any summer game!  The floating chip is the perfect,0,0,0,0,0
+34495,Toys_and_Games_5,5.0,OR,"I bought these for my son and he loves them. If they have one downside, it is the fact that the cardboard coukld be a little thicker to add strength to the product.",0,0,0,0,0
+34937,Toys_and_Games_5,5.0,OR,"This car is awesome! My son loves it and drives it all over the front room, he has crashed it a couple times and the only thing that has happened is a little paint scuff, the body still intact and everything! We love this car",0,0,0,0,0
+34944,Toys_and_Games_5,5.0,OR,"I bought this for my sons 15th birthday. He loves it and has a lot of fun. It flies VERY high for a toy and the camera is awesome. You download the app and use as the control screen. Very easy to lose, its white.",0,0,0,0,0
+35034,Toys_and_Games_5,4.0,OR,"I bought this for my 6 month old twins (Boy & Girl) They mainly chew on it. It keeps them entertained for a few minutes. It is more entertaining if an adults uses it to interact with the baby.
+
+The quality is great. It will last a long time.",0,0,0,0,0
+36589,Clothing_Shoes_and_Jewelry_5,5.0,CG,Love them!! Great flippies plus they fit well!!Wife loved it.,0,0,0,0,0
+36602,Clothing_Shoes_and_Jewelry_5,5.0,CG,Love love this shirt....and received many compliments.  It is thick enough to cover my belly button,0,0,0,0,0
+36959,Clothing_Shoes_and_Jewelry_5,5.0,CG,"Best nursing bra ever! After reading reviews, I ordered a size up. This bra is a bit",0,0,0,0,0
+37035,Clothing_Shoes_and_Jewelry_5,4.0,CG,Shorter than expected but still looks good. Overall a good purchase.,0,0,0,0,0
+37053,Clothing_Shoes_and_Jewelry_5,5.0,CG,"I needed a comfy fleece, and I bought these in two different colors! They are warm",0,0,0,0,0
+37081,Clothing_Shoes_and_Jewelry_5,5.0,OR,I love the fit and the feel of the fabric. I will order more.,0,0,0,0,0
+37146,Clothing_Shoes_and_Jewelry_5,5.0,CG,Perfect. These laces were exactly what I wanted.  I was able to make them work as,0,0,0,0,0
+37214,Clothing_Shoes_and_Jewelry_5,5.0,CG,Love it. Can easily be worn as a nightgown.,0,0,0,0,0
+37265,Clothing_Shoes_and_Jewelry_5,5.0,OR,I love this scarf...the colors are wonderful the design creative and the fabric is very soft.,0,0,0,0,0
+37379,Clothing_Shoes_and_Jewelry_5,3.0,CG,"Cramped, not the quality fabric that I expected.  Not what I wanted for a dress.",0,0,0,0,0
+37465,Clothing_Shoes_and_Jewelry_5,4.0,CG,Great looking shoes but produce a little bit of a popping noise when walking.  I have them in,0,0,0,0,0
+37555,Clothing_Shoes_and_Jewelry_5,5.0,CG,My new favorite go to pair of shoes.  I've always wanted to have a pair of these,0,0,0,0,0
+37565,Clothing_Shoes_and_Jewelry_5,4.0,OR,My only complaint is that the straps were a bit long but very good quality; will buy this brand again.,0,0,0,0,0
+37571,Clothing_Shoes_and_Jewelry_5,5.0,OR,"They fit perfect, they look expensive, they are the most confortable shoes that i had ever. I love the design",0,0,0,0,0
+37884,Clothing_Shoes_and_Jewelry_5,4.0,CG,"While they do fit, I find it difficult to find comfortable shoes that are close to the top of my feet.",0,0,0,0,0
+37898,Clothing_Shoes_and_Jewelry_5,2.0,CG,Absolutely see through. Must use a 9. 5 inch shoe for a lot of work. Very pretty.,0,0,0,0,0
+38184,Clothing_Shoes_and_Jewelry_5,5.0,CG,First time I bowled in a sporting event with my Dad I saw him wearing a dress and he was so impressed.,0,0,0,0,0
+38776,Clothing_Shoes_and_Jewelry_5,5.0,CG,"I WISH THEY CARRIED LARGER AND USED THEM FOR EVERYONE TO GIVE TO ME!  I'm so happy I did.  I also get the shoulders of the pants,",0,0,0,0,0
+39157,Clothing_Shoes_and_Jewelry_5,5.0,OR,So Im 5'7 175lbs and I bought this jacket in a large. I absolutely love it just fit a little too small for me. I have long arms and a long torso. Im keeping the jacket but switching to a bigger size. The style is so cute and I love the hood.,0,0,0,0,0

@@ -32,43 +32,43 @@ def reinitialize_folders(folders, drop_existing=False):
         Path(p).mkdir(parents=True, exist_ok=True)
 
 
-# ─────────────────────────────────────────────────────────
-# Daten laden und splitten in Train und Test mit Embeddings
-# ─────────────────────────────────────────────────────────
-def load_and_split_data_old(s_file_name="fake reviews dataset.csv"):
+# ─────────────────────────────────────────────
+# Daten laden (anreichern) und splitten in Train und Test
+# ─────────────────────────────────────────────
+def load_and_split_data(s_file_name="fake reviews dataset.csv", b_encode_label=False, 
+                        b_add_embeddings=False, 
+                        b_normalize_rating=False,
+                        b_one_hot_category=False,
+                        s_sentence_transformer='all-MiniLM-L12-v2'):
+    
     df = pd.read_csv(os.path.join(resources_dir, s_file_name))
 
     # one-hot encoding für category
-    df = pd.get_dummies(df, columns=['category'], dtype=float)
+    if b_one_hot_category:
+        # one-hot encoding manuell machen, damit die Originalspalte category erhalten bleibt)
+        dummies = pd.get_dummies(df['category'], prefix='category', dtype=float)
+        df = pd.concat([df, dummies], axis=1)
+
+        # so wird category entfertn
+        #df = pd.get_dummies(df, columns=['category'], dtype=float)
 
     # die Spalte "label" in 0=Fake und 1=Real umwandeln
-    df['label'] = df['label'].map({'OR': 1, 'CG': 0})
+    if b_encode_label:
+        df['label_encoded'] = df['label'].map({'OR': 1, 'CG': 0})
 
     # die Spalte rating normalisieren (0-1)
-    df['rating_norm'] = (df['rating'] - 1) / 4
+    if b_normalize_rating:
+        df['rating_norm'] = (df['rating'] - 1) / 4
 
+    # text_ in Vektoren umwandeln und an df anhängen
+    if b_add_embeddings:
+        df = add_embeddings(df, s_sentence_transformer)
+    
     # wenn es das Feld sentiment gibt, dann normalisieren (0-1)
     if 'sentiment' in df.columns:
         df['sentiment'] = (df['sentiment'] - 1) / 4
 
-    # text_ in Vektoren umwandeln und an df anhängen
-    df = add_embeddings(df)
 
-    train_df, test_df = train_test_split(
-        df,
-        test_size=0.2,
-        random_state=42,
-        stratify=df["label"] # stratify nach label, damit die Verteilung in Train und Test gleich ist
-    )
-
-    return train_df.reset_index(drop=True), test_df.reset_index(drop=True)
-
-
-# ─────────────────────────────────────────────
-# Daten laden und splitten in Train und Test
-# ─────────────────────────────────────────────
-def load_and_split_data(s_file_name="fake reviews dataset.csv"):
-    df = pd.read_csv(os.path.join(resources_dir, s_file_name))
 
     # IDs erzeugen für spätere Identifikation der falsch deklarierten
     df["id"] = range(1, len(df) + 1)
@@ -88,16 +88,19 @@ def load_and_split_data(s_file_name="fake reviews dataset.csv"):
 # ─────────────────────────────────────────────
 # Embedings von Description rechnen und bei df anfügen
 # ─────────────────────────────────────────────
-def add_embeddings(df):
+def add_embeddings(df, s_sentence_transformer='all-MiniLM-L12-v2'):
     reinitialize_folders([models_dir], drop_existing=False)
 
+    s_filename = 'embeddings_' + s_sentence_transformer.replace("/", "_") + ".npy"
+
     # wenn File description_embeddings.npy nicht vorhanden
-    if not os.path.exists(os.path.join(models_dir, "embeddings.npy")):
+    if not os.path.exists(os.path.join(models_dir, s_filename)):
         from sentence_transformers import SentenceTransformer
         from concurrent.futures import ThreadPoolExecutor
         import threading
 
-        embedder = SentenceTransformer('all-MiniLM-L12-v2')
+        embedder = SentenceTransformer(s_sentence_transformer)
+
         def encode_batch(args):
             idx, batch = args
             worker = threading.current_thread().name
@@ -114,14 +117,14 @@ def add_embeddings(df):
         embeddings = np.vstack(results)
 
         # save embeddings as npy file
-        np.save(os.path.join(models_dir, "embeddings.npy"), embeddings)
+        np.save(os.path.join(models_dir, s_filename), embeddings)
     else:
         # laod file
-        embeddings = np.load(os.path.join(models_dir, "embeddings.npy"))
+        embeddings = np.load(os.path.join(models_dir, s_filename))
 
 
     # die embeddings an den DataFrame anhängen und zurückgeben
-    embedding_cols = [f"emb_{i}" for i in range(384)]
+    embedding_cols = [f"emb_{i}" for i in range(embeddings.shape[1])]
     df = pd.concat([df, pd.DataFrame(embeddings, index=df.index, columns=embedding_cols)], axis=1)
     print(df.shape)
     return df

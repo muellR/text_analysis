@@ -23,47 +23,53 @@ from keras.callbacks import EarlyStopping, ModelCheckpoint
 
 b_init = True # if false, do not force Model regeneration, but load existing model if it exists
 
+# BAAI/bge-base-en-v1.5
+# all-MiniLM-L12-v2
+if 1==1:
+    s_sentence_transformer='BAAI/bge-base-en-v1.5'
+    s_senctence_tranformer_short = '_bge'
+else:
+    s_sentence_transformer='all-MiniLM-L12-v2'
+    s_senctence_tranformer_short = '_mini'
+
+
 
 # Daten laden und splitten --> 2 Varianten: mit oder ohne Sentiment als Feature
 train_df, test_df = pd, pd
 if 1==1:
-    s_praefix = "class_fcnn"
-    train_df, test_df = base.load_and_split_data(s_file_name='fake reviews dataset.csv')
+    s_praefix = "class_fcnn" + s_senctence_tranformer_short
+    train_df, test_df = base.load_and_split_data(s_file_name='fake reviews dataset.csv', 
+                                                 b_encode_label=True, 
+                                                 b_add_embeddings=True, 
+                                                 b_normalize_rating=True, 
+                                                 b_one_hot_category=True, 
+                                                 s_sentence_transformer=s_sentence_transformer
+                                            )
 else:
-    s_praefix = "class_fcnn_with_sentiment"
-    train_df, test_df = base.load_and_split_data(s_file_name='fake reviews dataset_senti.csv')
+    s_praefix = "class_fcnn_with_sentiment" + s_senctence_tranformer_short
+    train_df, test_df = base.load_and_split_data(s_file_name='fake reviews dataset_senti.csv', 
+                                                 b_encode_label=True, 
+                                                 b_add_embeddings=True, 
+                                                 b_normalize_rating=True, 
+                                                 b_one_hot_category=True, 
+                                                 s_sentence_transformer=s_sentence_transformer
+                                                 )
 
-
-
-# one-hot encoding für category
-train_df = pd.get_dummies(train_df, columns=['category'], dtype=float)
-
-# die Spalte "label" in 0=Fake und 1=Real umwandeln
-train_df['label'] = train_df['label'].map({'OR': 1, 'CG': 0})
-test_df['label'] = test_df['label'].map({'OR': 1, 'CG': 0})
-
-# die Spalte rating normalisieren (0-1)
-train_df['rating_norm'] = (train_df['rating'] - 1) / 4
-
-# wenn es das Feld sentiment gibt, dann normalisieren (0-1)
-if 'sentiment' in train_df.columns:
-    train_df['sentiment'] = (train_df['sentiment'] - 1) / 4
-
-# text_ in Vektoren umwandeln und an df anhängen
-train_df = base.add_embeddings(train_df)
-
-
-
+# BAAI/bge-base-en-v1.5
+# all-MiniLM-L12-v2
 
 print(train_df.shape)
 print(train_df.columns)
+
+print(test_df.shape)
+print(test_df.columns)
 
 
 
 # EarlyStopping Callback definieren
 early_stopping = EarlyStopping(
-    monitor='val_loss',      # Metrik beobachten
-    patience=5,              # Epochen warten bevor abgebrochen wird
+    monitor='val_loss',         # Metrik beobachten
+    patience=5,                 # Epochen warten bevor abgebrochen wird
     restore_best_weights=True,  # Bestes Modell wiederherstellen
     verbose=1
 )
@@ -81,25 +87,27 @@ checkpoint = ModelCheckpoint(
 feature_cols = [col for col in train_df.columns if
     col.startswith('emb_') or
     col.startswith('category_') or
-    col == 'rating' or
+    col == 'rating_norm' or
     col == 'sentiment' or
     col == 'accuracy'
 ]
 
+
 # die Features und Labels in numpy arrays umwandeln
 X_train = train_df[feature_cols].values
-Y_train = train_df['label'].values
+Y_train = train_df['label_encoded'].values
 
 X_val = test_df[feature_cols].values
-Y_val = test_df['label'].values
+Y_val = test_df['label_encoded'].values
 
 
-# TEST standardisieren der Features
+
+# TEST standardisieren der Roh Features
+# nicht nötig bei SBERT Embeddings, da diese bereits normalisiert sind, aber könnte bei anderen Features helfen
 # from sklearn.preprocessing import StandardScaler
 # scaler = StandardScaler()
 # X_train = scaler.fit_transform(X_train)
 # X_val = scaler.transform(X_val)
-
 
 
 
@@ -165,12 +173,35 @@ fig.savefig(os.path.join(base.figures_dir, s_praefix + '_learning_curves.png'), 
 
 
 
-
-
-# Auswertung des Modells auf dem Testset
-# predict each instance of the testset
+# Evaluation auf Testdaten - predict each instance of the testset
 pred = class_fcnn.predict(X_val)
 pred_classes = (pred > 0.5).astype(int)
+
+pred_classes = np.ravel(pred_classes) # flatten to 1D array for comparison with Y_val
+
+# classification report F1, precision, recall
+report = classification_report(Y_val, pred_classes)
+print("Classification Report:\n", report)
+
+
+
+# test_df auf die Originalspalten reduzieren
+save_df = test_df[['category', 'rating', 'label', 'text_', 'id', 'label_encoded']]
+
+# Falsch und korrekt klassifizierte Datensätze je in ein File schreiben
+correct_mask = (pred_classes == Y_val)
+wrong_mask = ~correct_mask # invert mask to get wrong predictions
+correct_df = save_df.loc[correct_mask].sort_values("id")
+wrong_df = save_df.loc[wrong_mask].sort_values("id")
+base.reinitialize_folders(base.predictions_dir, drop_existing=False)
+correct_df.to_csv(os.path.join(base.predictions_dir, "correct_predictions_" + s_praefix + ".csv"), index=False)
+wrong_df.to_csv(os.path.join(base.predictions_dir, "wrong_predictions_" + s_praefix + ".csv"), index=False)
+print("Path to predictions:", base.predictions_dir)
+
+
+
+
+
 
 # get confusion matrix
 cm = confusion_matrix(Y_val, pred_classes)
@@ -185,8 +216,6 @@ plt.savefig(os.path.join(base.figures_dir, s_praefix + '_confusion_matrix.png'),
 plt.show()
 
 
-# classification report F1, precision, recall
-print(classification_report(Y_val, pred_classes))
 
 
 

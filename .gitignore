@@ -7,6 +7,9 @@ fccn*
 
 #figures/
 
+# big files
+embeddings_BAAI_bge-base-en-v1.5.npy
+
 # macOS
 .DS_Store
 ._.DS_Store
