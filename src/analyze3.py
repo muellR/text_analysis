@@ -3,28 +3,26 @@
 
 import numpy as np
 import pandas as pd
-from collections import Counter
+import matplotlib
+matplotlib.use('Agg') # "Anti-Grain Geometry" → rendert nur in den Speicher (RAM)
+import matplotlib.pyplot as plt
+import matplotlib.patches as mpatches
 import spacy
 import base
 import os
 
-# python3 -m spacy download en_core_web_lg
-
+# install: python3 -m spacy download en_core_web_lg
 nlp = spacy.load("en_core_web_lg")  # oder de_core_news_sm falls Deutsch
-# Grundlegende NLP-Features:
-# - Tokenisierung (Text → Wörter/Sätze)
-# - POS-Tagging (Wortarten: Nomen, Verb, …)
-# - Named Entity Recognition (Personen, Orte, Firmen, …)
-# - Dependency Parsing (grammatische Struktur)
+# NLP-Features: Tokenisierung (Wörter/Sätze), POS-Tagging (Wortarten: Nomen, Verb), Named Entity Recognition (Personen, Orte, Firmen), Dependency Parsing (grammatische Struktur)
 
 
 
 # ============================================================
 # LOAD DATA
 # ============================================================
+print("\n" + "=" * 80 + "\n0. LOAD DATA\n" + "=" * 80)
 
 file_path = os.path.join(base.predictions_dir, "combined_predictions.csv")
-
 df = pd.read_csv(file_path)
 
 MODELS = [
@@ -38,8 +36,9 @@ print(f"Records: {len(df):,}")
 
 
 # ============================================================
-# Feature-Engineering auf dem Text (Grundlage)
+# 1. Feature-Engineering auf dem Text (Grundlage)
 # ============================================================
+print("\n" + "=" * 80 + "\n1. Feature-Engineering auf dem Text (Grundlage)\n" + "=" * 80)
 
 # wenn File vorhanden, laden, sonst neu berechnen
 if os.path.exists(os.path.join(base.figures_dir, "all_data_with_features1.csv")):
@@ -71,10 +70,14 @@ else:
         index=False
     )
 
+# print namen der neuen Features
+print("Neue Features:", [col for col in df.columns if col not in ["text_", "label", "id", "category", "rating", "correct_count"] + MODELS])
+
 
 # ============================================================
-# Vergleich der Textmerkmale
+# 2.Vergleich der Textmerkmale
 # ============================================================
+print("\n" + "=" * 80 + "\n2. Vergleich der Textmerkmale\n" + "=" * 80)
 
 df["difficulty"] = 3 - df[MODELS].sum(axis=1)
 
@@ -108,8 +111,9 @@ print(summary)
 
 
 # ============================================================
-# Linguistische „Schwierigkeit“ messen - Anzahl der Named Entities
+# 3. Linguistische „Schwierigkeit“ messen - Anzahl der Named Entities
 # ============================================================
+print("\n" + "=" * 80 + "\n3.Linguistische „Schwierigkeit“ messen - Anzahl der Named Entities\n" + "=" * 80)
 
 # "I bought an iPhone from Apple for $999 in New York."
 # → ents: [iPhone (PRODUCT), Apple (ORG), $999 (MONEY), New York (GPE)]
@@ -149,9 +153,9 @@ print(difficulty_stats)
 
 
 # ============================================================
-# Linguistische „Schwierigkeit“ messen - Ambiguität / abstrakte Wörter
+# 4. Linguistische „Schwierigkeit“ messen - Ambiguität / abstrakte Wörter
 # ============================================================
-
+print("\n" + "=" * 80 + "\n4. Linguistische „Schwierigkeit“ messen - Ambiguität / abstrakte Wörter\n" + "=" * 80)
 
 # https://github.com/ArtsEngine/concreteness/blob/master/Concreteness_ratings_Brysbaert_et_al_BRM.txt
 # /Users/ed/kDrive/Data/Scripts/Python/MAS/text_analysis/resources/Concreteness_ratings_Brysbaert_et_al_BRM.txt
@@ -176,7 +180,6 @@ else:
         os.path.join(base.figures_dir, "all_data_with_features3.csv"),
         index=False
     )  
-
 
 concreteness_score_stats = (
     df.groupby("difficulty")["concreteness_score"]
@@ -207,9 +210,9 @@ print("\n" + str(concreteness_score_stats))
 
 
 # ============================================================
-# Sentiment (falls relevant für Kategorie)
+# 5. Sentiment (falls relevant für Kategorie)
 # ============================================================
-
+print("\n" + "=" * 80 + "\n5. Sentiment (falls relevant für Kategorie)\n" + "=" * 80)
 
 # wenn File vorhanden, laden, sonst neu berechnen
 if os.path.exists(os.path.join(base.figures_dir, "all_data_with_features4.csv")):
@@ -249,9 +252,6 @@ print(sentiment_stats)
 
 
 
-
-
-
 # Fazit:
 # Hohes positives Sentiment = schwieriger, weil generische Lobhudelei wenig Kategorie-Signal liefert.
 # Das passt auch gut zum entity_count-Befund
@@ -259,14 +259,12 @@ print(sentiment_stats)
 
 
 
-
 # ============================================================
-# Embeddings → “Warum ähnlich → falsch?”
-# ============================================================
-from sentence_transformers import SentenceTransformer
-from sklearn.decomposition import PCA
+# 6. Embeddings & PCA - Gibt es ähnliche Vektoren für Richtig/Falsch?
+# # ============================================================
+print("\n" + "=" * 80 + "\n6. Embeddings & PCA - Gibt es ähnliche Vektoren für Richtig/Falsch?\n" + "=" * 80)
 
-if 1==1:
+if 1==2:
     s_sentence_transformer='BAAI/bge-base-en-v1.5'
     s_senctence_tranformer_short = '_bge'
 else:
@@ -276,11 +274,13 @@ else:
 if os.path.exists(os.path.join(base.figures_dir, "all_text_embeddings" + s_senctence_tranformer_short + ".npy")):
     emb = np.load(os.path.join(base.figures_dir, "all_text_embeddings" + s_senctence_tranformer_short + ".npy"))
 else:
+    from sentence_transformers import SentenceTransformer
     model = SentenceTransformer(s_sentence_transformer)
     emb = model.encode(df["text_"].tolist(), show_progress_bar=True)
     # emb speichern
     np.save(os.path.join(base.figures_dir, "all_text_embeddings" + s_senctence_tranformer_short + ".npy"), emb)
 
+from sklearn.decomposition import PCA
 pca = PCA(n_components=2)
 # fit berechnet die 2 Hauptrichtungen aus emb (dim-D-Matrix), transform projiziert alle Punkte auf diese 2 Richtungen
 emb_2d = pca.fit_transform(emb)
@@ -291,22 +291,23 @@ df["emb_y"] = emb_2d[:,1]
 df["any_error"] = (df[MODELS].sum(axis=1) < 3).astype(int)
 
 # Visualisierung der Embeddings mit Farben für difficulty
-import matplotlib.pyplot as plt
-
 plt.scatter(
-    df["emb_x"],
-    df["emb_y"],
-    c=df["any_error"],
-    cmap="coolwarm",
+    df["emb_x"], 
+    df["emb_y"], 
+    c=df["any_error"].map({0: "#2ecc71", 1: "#e74c3c"}), 
     s=5
 )
 
 plt.title("Embedding Space: Errors vs Correct")
 plt.xlabel(f"PC1 ({pca.explained_variance_ratio_[0]*100:.1f}% variance)")
 plt.ylabel(f"PC2 ({pca.explained_variance_ratio_[1]*100:.1f}% variance)")
+plt.legend(handles=[
+    mpatches.Patch(color="#2ecc71", label="All correct"),
+    mpatches.Patch(color="#e74c3c", label="At least 1 error")
+])
+plt.savefig(os.path.join(base.figures_dir, "11_all_embedding_space" + s_senctence_tranformer_short + ".png"), dpi=300)
+plt.close()
 
-plt.savefig(os.path.join(base.figures_dir, "all_embedding_space" + s_senctence_tranformer_short + ".png"), dpi=300)
-plt.show(block=False)
 
 
 # Was der Plot zeigt: Blau Richtig, Rot Fehler.
@@ -316,11 +317,20 @@ plt.show(block=False)
 # Rot/Blau gemischt → Fehler verteilen sich gleichmässig im Semantikraum → kein strukturelles Muster
 
 
+# ============================================================
+# 6.1 Embeddings & t-SNE - Gibt es ähnliche Vektoren für Richtig/Falsch?
+# # ============================================================
+print("\n" + "=" * 80 + "\n6.1 Embeddings & t-SNE - Gibt es ähnliche Vektoren für Richtig/Falsch?\n" + "=" * 80)
 
 # das gleiche mit t-sne statt PCA:
-if 0:
-    from sklearn.manifold import TSNE
+from sklearn.manifold import TSNE
 
+# Vorgang dauert, darum speichern und von File laden...
+tsne_cache = os.path.join(base.figures_dir, "tsne_cache" + s_senctence_tranformer_short + ".npy")
+
+if os.path.exists(tsne_cache):
+    emb_2d = np.load(tsne_cache)
+else:
     # PCA vorher auf 50D reduzieren (schneller, empfohlen bei hochdim. Daten)
     pca_pre = PCA(n_components=50)
     emb_50d = pca_pre.fit_transform(emb)
@@ -332,44 +342,43 @@ if 0:
         random_state=42,
         verbose=1
     )
+
     emb_2d = tsne.fit_transform(emb_50d)
-
-    df["emb_x"] = emb_2d[:, 0]
-    df["emb_y"] = emb_2d[:, 1]
-
-    df["any_error"] = (df[MODELS].sum(axis=1) < 3).astype(int)
-
-    plt.scatter(
-        df["emb_x"],
-        df["emb_y"],
-        c=df["any_error"],
-        cmap="coolwarm",
-        s=5
-    )
-
-    plt.title("t-SNE Embedding Space: Errors vs Correct")
-    plt.xlabel("t-SNE 1")
-    plt.ylabel("t-SNE 2")
-
-    cbar = plt.colorbar()
-    cbar.set_ticks([0, 1])
-    cbar.set_ticklabels(["All correct", "At least 1 error"])
-
-    plt.savefig(os.path.join(base.figures_dir, "all_embedding_space_tsne" + s_senctence_tranformer_short + ".png"), dpi=300)
-    plt.show(block=False)
+    np.save(tsne_cache, emb_2d)
 
 
+df["emb_x"] = emb_2d[:, 0]
+df["emb_y"] = emb_2d[:, 1]
 
+df["any_error"] = (df[MODELS].sum(axis=1) < 3).astype(int)
 
+plt.scatter(
+    df["emb_x"], 
+    df["emb_y"], 
+    c=df["any_error"].map({0: "#2ecc71", 1: "#e74c3c"}), 
+    s=5
+)
+
+plt.title("t-SNE Embedding Space: Errors vs Correct")
+plt.xlabel("t-SNE 1")
+plt.ylabel("t-SNE 2")
+plt.legend(handles=[
+    mpatches.Patch(color="#2ecc71", label="All correct"),
+    mpatches.Patch(color="#e74c3c", label="At least 1 error")
+])
+plt.savefig(os.path.join(base.figures_dir, "12_all_embedding_space_tsne" + s_senctence_tranformer_short + ".png"), dpi=300)
+plt.close()
 
 
 
 
 
 # ============================================================
-# Hard Cases
+# 7. Wortfrequenz bei den schlechtesten Predictions
 # ============================================================
+print("\n" + "=" * 80 + "\n7. Wortfrequenz bei den schlechtesten Predictions\n" + "=" * 80)
 
+# Texte, die alle falsch klassifziert haben
 hard_cases = df[df[MODELS].sum(axis=1) == 0]
 
 from sklearn.feature_extraction.text import CountVectorizer
@@ -413,11 +422,18 @@ print("\n" + str(word_freq.reset_index(drop=True)))
 
 
 # ============================================================
-# Difficulty Score - Was macht es schwer, richtig zu Klassifizieren?
+# 8. Difficulty Score - Was macht es schwer, richtig zu Klassifizieren?
 # ============================================================
+print("\n" + "=" * 80 + "\n8. Difficulty Score - Was macht es schwer, richtig zu Klassifizieren?\n" + "=" * 80)
 
+# Welche Eigenschaften eines Textes erklären am besten, warum Modelle daran scheitern
+
+print("features: ", features)
+
+# 3 Modelle: alle richtig = 3-3 = 0, alle falsch = 3-0 = 3
 df["difficulty"] = 3 - df[MODELS].sum(axis=1)
-
+# 0 = einfach
+# 3 = schweer
 
 from sklearn.ensemble import RandomForestRegressor
 
@@ -427,6 +443,9 @@ y = df["difficulty"]
 model = RandomForestRegressor()
 
 model.fit(X, y)
+# RF lernt welche Features (X) erklären den Difficulty Score (y)?
+# kein Train/Test-Split sondern nur Muster im vorhandenen Datensatz verstehen
+
 importance = pd.Series(model.feature_importances_, index=features)
 #importance.sort_values().plot(kind="barh")
 

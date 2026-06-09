@@ -2,27 +2,21 @@
 
 import os
 from itertools import combinations
-
-import numpy as np
 import pandas as pd
-
+import matplotlib
+matplotlib.use('Agg') # "Anti-Grain Geometry" → rendert nur in den Speicher (RAM)
 import matplotlib.pyplot as plt
 import seaborn as sns
-
-from scipy.stats import chi2
 from statsmodels.stats.contingency_tables import mcnemar
-
 import base
-
-
 
 
 # ============================================================
 # LOAD DATA
 # ============================================================
+print("\n" + "=" * 80 + "\n0. LOAD DATA\n" + "=" * 80)
 
 file_path = os.path.join(base.predictions_dir, "combined_predictions.csv")
-
 df = pd.read_csv(file_path)
 
 MODELS = [
@@ -37,10 +31,7 @@ print(f"Records: {len(df):,}")
 # ============================================================
 # 1. OVERALL PERFORMANCE
 # ============================================================
-
-print("\n" + "=" * 80)
-print("1. OVERALL PERFORMANCE")
-print("=" * 80)
+print("\n" + "=" * 80 + "\n1. OVERALL PERFORMANCE\n" + "=" * 80)
 
 overall = pd.DataFrame({
     "accuracy": [df[m].mean() for m in MODELS]
@@ -71,18 +62,16 @@ for bar in ax.patches:
 ax.set_title("Overall Accuracy")
 ax.set_ylabel("Accuracy")
 plt.tight_layout()
-plt.savefig(os.path.join(base.figures_dir, "all_accuracy.png"))
-plt.show(block=False)
+plt.savefig(os.path.join(base.figures_dir, "01_all_accuracy.png"))
+#plt.show(block=False)
+plt.close()
 
 
 
 # ============================================================
 # 2. MCNEMAR TESTS
 # ============================================================
-
-print("\n" + "=" * 80)
-print("2. MCNEMAR TESTS")
-print("=" * 80)
+print("\n" + "=" * 80 + "\n2. MCNEMAR TESTS\n" + "=" * 80)
 
 ALPHA = 0.05
 
@@ -111,10 +100,7 @@ for m1, m2 in combinations(MODELS, 2):
 # ============================================================
 # 3. CATEGORY ANALYSIS
 # ============================================================
-
-print("\n" + "=" * 80)
-print("3. CATEGORY ANALYSIS")
-print("=" * 80)
+print("\n" + "=" * 80 + "\n3. CATEGORY ANALYSIS\n" + "=" * 80)
 
 category_perf = (
     df.groupby("category")[MODELS]
@@ -137,17 +123,15 @@ sns.heatmap(
 )
 plt.title("Accuracy by Category")
 plt.tight_layout()
-plt.savefig(os.path.join(base.figures_dir, "all_category_performance_heatmap.png"))
-plt.show(block=False)
+plt.savefig(os.path.join(base.figures_dir, "03_all_category_performance_heatmap.png"))
+#plt.close()
+plt.close()
 
 
 # ============================================================
 # 4. RATING ANALYSIS
 # ============================================================
-
-print("\n" + "=" * 80)
-print("4. RATING ANALYSIS")
-print("=" * 80)
+print("\n" + "=" * 80 + "\n4. RATING ANALYSIS\n" + "=" * 80)
 
 rating_perf = (
     df.groupby("rating")[MODELS]
@@ -172,17 +156,15 @@ plt.xlabel("Rating")
 plt.ylabel("Accuracy")
 plt.grid(True)
 plt.tight_layout()
-plt.savefig(os.path.join(base.figures_dir, "all_rating_performance.png"))
-plt.show(block=False)
+plt.savefig(os.path.join(base.figures_dir, "04_all_rating_performance.png"))
+#plt.close()
+plt.close()
 
 
 # ============================================================
 # 5. MODEL AGREEMENT
 # ============================================================
-
-print("\n" + "=" * 80)
-print("5. MODEL AGREEMENT")
-print("=" * 80)
+print("\n" + "=" * 80 + "\n5. MODEL AGREEMENT\n" + "=" * 80)
 
 agreement = (
     df[MODELS]
@@ -194,24 +176,20 @@ agreement = (
 print(agreement)
 
 agreement.to_csv(
-    os.path.join(base.figures_dir, "all_model_agreement.csv")
+    os.path.join(base.figures_dir, "05_all_model_agreement.csv")
 )
 
 
 # ============================================================
 # 6. ENSEMBLE
 # ============================================================
-
-print("\n" + "=" * 80)
-print("6. ENSEMBLE")
-print("=" * 80)
+print("\n" + "=" * 80 + "\n6. ENSEMBLE\n" + "=" * 80)
 
 df["ensemble_vote"] = (
     df[MODELS].sum(axis=1) >= 2
 ).astype(int)
 
 ensemble_acc = df["ensemble_vote"].mean()
-
 print(f"Ensemble Accuracy: {ensemble_acc:.4f}")
 
 comparison = overall.copy()
@@ -221,7 +199,6 @@ comparison = comparison.sort_values(
     "accuracy",
     ascending=False
 )
-
 print(comparison)
 
 fig, ax = plt.subplots(figsize=(8, 5))
@@ -244,17 +221,15 @@ for bar in ax.patches:
 
 ax.set_title("Model vs Ensemble")
 plt.tight_layout()
-plt.savefig(os.path.join(base.figures_dir, "all_model_vs_ensemble.png"))
-plt.show(block=False)
+plt.savefig(os.path.join(base.figures_dir, "06_all_model_vs_ensemble.png"))
+#plt.close()
+plt.close()
 
 
 # ============================================================
 # 7. ERROR ANALYSIS
 # ============================================================
-
-print("\n" + "=" * 80)
-print("7. ERROR ANALYSIS")
-print("=" * 80)
+print("\n" + "=" * 80 + "\n7. ERROR ANALYSIS\n" + "=" * 80)
 
 all_wrong = df[
     (df["class_fcnn_bge"] == 0)
@@ -266,27 +241,19 @@ print(f"All models wrong: {len(all_wrong)}")
 print(f"distinct categories: {df['category'].nunique()}")
 
 all_wrong.to_csv(
-    os.path.join(base.figures_dir, "all_models_wrong.csv"),
+    os.path.join(base.figures_dir, "07_all_models_wrong.csv"),
     index=False
 )
 
 print("\nTop categories among all-fail cases:")
-print(
-    all_wrong["category"]
-    .value_counts()
-    #.head(20)
-)
-
+print(all_wrong["category"].value_counts())
 
 
 
 # ============================================================
 # 8. TEXT LENGTH ANALYSIS
 # ============================================================
-
-print("\n" + "=" * 80)
-print("8. TEXT LENGTH ANALYSIS")
-print("=" * 80)
+print("\n" + "=" * 80 + "\n8. TEXT LENGTH ANALYSIS\n" + "=" * 80)
 
 df["char_length"] = (
     df["text_"]
@@ -334,11 +301,9 @@ ax.set_title("Accuracy by Text Length")
 ax.set_ylabel("Word Count Bin")
 ax.set_xlabel("Model")
 plt.tight_layout()
-plt.savefig(os.path.join(base.figures_dir, "all_length_performance.png"))
-plt.show(block=False)
-
-
-
+plt.savefig(os.path.join(base.figures_dir, "08_all_length_performance.png"))
+#plt.close()
+plt.close()
 
 
 
@@ -346,10 +311,7 @@ plt.show(block=False)
 # ============================================================
 # 9. DIFFICULTY INDEX
 # ============================================================
-
-print("\n" + "=" * 80)
-print("9. DIFFICULTY INDEX")
-print("=" * 80)
+print("\n" + "=" * 80 + "\n9. DIFFICULTY INDEX\n" + "=" * 80)
 
 df["difficulty"] = 3 - df[MODELS].sum(axis=1)
 
@@ -368,9 +330,8 @@ difficulty_summary = pd.DataFrame({
 
 print(difficulty_summary)
 
-
-# Durchschnittliche Schwierigkeit pro Kategorie
-# in sovieln Modellen pro 3 Modellen falsch
+print("\nDurchschnittliche Schwierigkeit pro Kategorie:")
+print("in sovieln Modellen pro 3 Modellen falsch")
 difficulty_category = (
     df.groupby("category")["difficulty"]
     .mean()
@@ -384,10 +345,7 @@ print(difficulty_category.head(20))
 # ============================================================
 # 10. HARDEST CASES EXPORT
 # ============================================================
-
-print("\n" + "=" * 80)
-print("10. HARDEST CASES")
-print("=" * 80)
+print("\n" + "=" * 80 + "\n10. HARDEST CASES\n" + "=" * 80)
 
 hardest = (
     df.sort_values(
@@ -399,7 +357,7 @@ hardest = (
 hardest_50 = hardest.head(50)
 
 hardest_50.to_csv(
-    os.path.join(base.figures_dir, "all_hardest_50_cases.csv"),
+    os.path.join(base.figures_dir, "10_all_hardest_50_cases.csv"),
     index=False
 )
 
@@ -412,3 +370,6 @@ print(hardest_50[
         "word_length"
     ]
 ].head(20))
+
+
+print("\nDone!")
