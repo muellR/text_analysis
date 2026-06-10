@@ -264,7 +264,7 @@ print(sentiment_stats)
 # # ============================================================
 print("\n" + "=" * 80 + "\n6. Embeddings & PCA - Gibt es ähnliche Vektoren für Richtig/Falsch?\n" + "=" * 80)
 
-if 1==2:
+if 1==1:
     s_sentence_transformer='BAAI/bge-base-en-v1.5'
     s_senctence_tranformer_short = '_bge'
 else:
@@ -280,6 +280,7 @@ else:
     # emb speichern
     np.save(os.path.join(base.figures_dir, "all_text_embeddings" + s_senctence_tranformer_short + ".npy"), emb)
 
+
 from sklearn.decomposition import PCA
 pca = PCA(n_components=2)
 # fit berechnet die 2 Hauptrichtungen aus emb (dim-D-Matrix), transform projiziert alle Punkte auf diese 2 Richtungen
@@ -289,6 +290,7 @@ df["emb_x"] = emb_2d[:,0]
 df["emb_y"] = emb_2d[:,1]
 
 df["any_error"] = (df[MODELS].sum(axis=1) < 3).astype(int)
+
 
 # Visualisierung der Embeddings mit Farben für difficulty
 plt.scatter(
@@ -309,7 +311,6 @@ plt.savefig(os.path.join(base.figures_dir, "11_all_embedding_space" + s_senctenc
 plt.close()
 
 
-
 # Was der Plot zeigt: Blau Richtig, Rot Fehler.
 # Nicht die Achsen sind interessant, sondern ob sich Farben clustern:
 
@@ -326,7 +327,7 @@ print("\n" + "=" * 80 + "\n6.1 Embeddings & t-SNE - Gibt es ähnliche Vektoren f
 from sklearn.manifold import TSNE
 
 # Vorgang dauert, darum speichern und von File laden...
-tsne_cache = os.path.join(base.figures_dir, "tsne_cache" + s_senctence_tranformer_short + ".npy")
+tsne_cache = os.path.join(base.figures_dir, "12_tsne_cache" + s_senctence_tranformer_short + ".npy")
 
 if os.path.exists(tsne_cache):
     emb_2d = np.load(tsne_cache)
