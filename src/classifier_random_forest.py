@@ -1,7 +1,10 @@
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.model_selection import train_test_split
-from sklearn.metrics import accuracy_score, classification_report
+from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
+from sklearn.model_selection import learning_curve
+import matplotlib.pyplot as plt
+import seaborn as sns
 from sklearn.preprocessing import LabelEncoder
 from scipy.sparse import hstack
 import base
@@ -80,10 +83,113 @@ else:
 final_model = RandomForestClassifier(**best_params, n_jobs=-1, random_state=42)
 final_model.fit(X_train, y_train)
 
+# ============================================================
+# LEARNING CURVE
+# ============================================================
+
+train_sizes, train_scores, val_scores = learning_curve(
+    estimator=RandomForestClassifier(
+        **best_params,
+        n_jobs=-1,
+        random_state=42
+    ),
+    X=X_train,
+    y=y_train,
+    cv=3,
+    scoring="accuracy",
+    train_sizes=np.linspace(0.3, 1.0, 5),
+    n_jobs=-1
+)
+
+train_mean = train_scores.mean(axis=1)
+train_std = train_scores.std(axis=1)
+
+val_mean = val_scores.mean(axis=1)
+val_std = val_scores.std(axis=1)
+
+plt.figure(figsize=(8, 5))
+
+plt.plot(
+    train_sizes,
+    train_mean,
+    marker="o",
+    label="Training Accuracy"
+)
+
+plt.plot(
+    train_sizes,
+    val_mean,
+    marker="o",
+    label="Validation Accuracy"
+)
+
+plt.fill_between(
+    train_sizes,
+    train_mean - train_std,
+    train_mean + train_std,
+    alpha=0.2
+)
+
+plt.fill_between(
+    train_sizes,
+    val_mean - val_std,
+    val_mean + val_std,
+    alpha=0.2
+)
+
+plt.xlabel("Training Samples")
+plt.ylabel("Accuracy")
+plt.title("Random Forest Learning Curve")
+plt.legend()
+plt.grid(True)
+
+plt.tight_layout()
+
+plt.savefig(
+    os.path.join(
+        base.figures_dir,
+        "class_random_forest_learning_curve.png"
+    )
+)
+
+plt.close()
+
 # Evaluation auf Testdaten
 y_pred = final_model.predict(X_test)
 report = classification_report(y_test, y_pred, target_names=le.classes_)
 print("Classification Report:\n", report)
+
+# ============================================================
+# CONFUSION MATRIX
+# ============================================================
+
+cm = confusion_matrix(y_test, y_pred)
+
+plt.figure(figsize=(6, 5))
+
+sns.heatmap(
+    cm,
+    annot=True,
+    fmt="d",
+    cmap="Blues",
+    xticklabels=le.classes_,
+    yticklabels=le.classes_
+)
+
+plt.title("Random Forest - Confusion Matrix")
+plt.xlabel("Predicted Label")
+plt.ylabel("True Label")
+
+plt.tight_layout()
+
+plt.savefig(
+    os.path.join(
+        base.figures_dir,
+        "class_random_forest_confusion_matrix.png"
+    )
+)
+
+plt.close()
 
 # Falsch und korrekt klassifizierte Datensätze je in ein File schreiben
 correct_mask = (y_pred == y_test.values)
