@@ -111,7 +111,7 @@ category_perf = (
 print(category_perf.head())
 
 category_perf.to_csv(
-    os.path.join(base.figures_dir, "all_category_performance.csv")
+    os.path.join(base.figures_dir, "03_all_category_performance.csv")
 )
 
 plt.figure(figsize=(12, 8))

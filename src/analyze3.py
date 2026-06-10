@@ -271,14 +271,14 @@ else:
     s_sentence_transformer='all-MiniLM-L12-v2'
     s_senctence_tranformer_short = '_mini'
 
-if os.path.exists(os.path.join(base.figures_dir, "all_text_embeddings" + s_senctence_tranformer_short + ".npy")):
-    emb = np.load(os.path.join(base.figures_dir, "all_text_embeddings" + s_senctence_tranformer_short + ".npy"))
+if os.path.exists(os.path.join(base.figures_dir, "11_all_text_embeddings" + s_senctence_tranformer_short + ".npy")):
+    emb = np.load(os.path.join(base.figures_dir, "11_all_text_embeddings" + s_senctence_tranformer_short + ".npy"))
 else:
     from sentence_transformers import SentenceTransformer
     model = SentenceTransformer(s_sentence_transformer)
     emb = model.encode(df["text_"].tolist(), show_progress_bar=True)
     # emb speichern
-    np.save(os.path.join(base.figures_dir, "all_text_embeddings" + s_senctence_tranformer_short + ".npy"), emb)
+    np.save(os.path.join(base.figures_dir, "11_all_text_embeddings" + s_senctence_tranformer_short + ".npy"), emb)
 
 
 from sklearn.decomposition import PCA

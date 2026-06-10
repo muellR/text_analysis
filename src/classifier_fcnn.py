@@ -8,6 +8,8 @@ import base
 import pandas as pd
 import numpy as np
 import pickle
+import matplotlib
+matplotlib.use('Agg') # "Anti-Grain Geometry" → rendert nur in den Speicher (RAM)
 import matplotlib.pyplot as plt
 plt.style.use('default')
 from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay, classification_report
@@ -213,7 +215,6 @@ disp = ConfusionMatrixDisplay(confusion_matrix=cm)
 disp.plot(cmap='viridis')
 plt.title('Confusion Matrix ' + s_praefix)
 plt.savefig(os.path.join(base.figures_dir, s_praefix + '_confusion_matrix.png'), dpi=150, bbox_inches='tight')
-plt.show()
 
 
 
