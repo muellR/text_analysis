@@ -289,8 +289,8 @@ emb_2d = pca.fit_transform(emb)
 df["emb_x"] = emb_2d[:,0]
 df["emb_y"] = emb_2d[:,1]
 
-df["any_error"] = (df[MODELS].sum(axis=1) < 3).astype(int)
-
+# nur wenn alle Modelle richtig liegen, wird der Punkt grün
+df["any_error"] = (df[MODELS].sum(axis=1) < len(MODELS)).astype(int)
 
 # Visualisierung der Embeddings mit Farben für difficulty
 plt.scatter(
