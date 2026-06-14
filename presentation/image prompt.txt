@@ -1,0 +1,3 @@
+Propt Titelbild fake reviews
+
+create image: A wide-format hero image for a data science project. In the foreground, large golden 4.5 stars spanning the full width — the last half-star slightly faded. A bold question mark is centered, slightly overlapping the stars. In the soft-blurred background, a vertical column of product review text snippets, like a mobile review feed — short lines of gray text, user names, star ratings, barely readable. Flat, editorial style. Muted warm tones: off-white, sand, amber. No people, no hands. Clean, minimal, slightly mysterious mood.
