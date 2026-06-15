@@ -108,7 +108,7 @@ category_perf = (
     .sort_index()
 )
 
-print(category_perf.head())
+print(category_perf.head(11))
 
 category_perf.to_csv(
     os.path.join(base.figures_dir, "03_all_category_performance.csv")
@@ -159,6 +159,13 @@ plt.tight_layout()
 plt.savefig(os.path.join(base.figures_dir, "04_all_rating_performance.png"))
 #plt.close()
 plt.close()
+
+# Alle Modelle predicten höhere Ratings schlecher, obwohl es von diesen mehr gibt
+# 1	2155
+# 2	1967
+# 3	3786
+# 4	7965
+# 5	24559
 
 
 # ============================================================

@@ -117,4 +117,5 @@ fig.update_layout(
     yaxis_title="UMAP 2",
 )
 
+fig.write_html(os.path.join(base.figures_dir, "13_umap_embedding_space.html"))
 fig.show()

@@ -99,7 +99,7 @@ summary = pd.DataFrame({
 summary = summary.sort_values("corr_with_difficulty", ascending=False)
 print(summary)
 
-# Positiver Korrelationswert → Feature steigt mit Schwierigkeit (z.B. längere Texte = schwieriger)
+# Positiver Korrelationswert → Feature steigt mit Schwierigkeit (z.B. längere Texte = einfacher)
 # Negativer Wert → Feature sinkt mit Schwierigkeit (z.B. kurze Texte = schwieriger)
 
 # Alle Korrelationen sind sehr schwach (nahe 0), aber die Richtung ist interessant:
