@@ -1,6 +1,6 @@
 <mxfile host="Electron">
   <diagram name="Fake Review Classification Pipeline" id="pipeline">
-    <mxGraphModel dx="1542" dy="922" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1454" pageHeight="1050" math="0" shadow="0">
+    <mxGraphModel dx="644" dy="404" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1454" pageHeight="1050" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -52,10 +52,10 @@
         <mxCell id="silo3_title" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;fontSize=14;fontStyle=1;fontColor=#AE4132;" value="LLM Classifier" vertex="1">
           <mxGeometry height="28" width="340" x="914" y="70" as="geometry" />
         </mxCell>
-        <mxCell id="s3_prompt" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=11;" value="Prompt Engineering&#xa;Systemrolle + Review-Text + Rating&#xa;→ Structured Output: CG / OR" vertex="1">
+        <mxCell id="s3_prompt" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=11;" value="Prompt Engineering&lt;br&gt;Systemrolle + Review-Text + Rating&lt;br&gt;→ Structured Output: CG / OR&amp;nbsp;&amp;nbsp;→ 1/0" vertex="1">
           <mxGeometry height="65" width="280" x="944" y="110" as="geometry" />
         </mxCell>
-        <mxCell id="s3_llm" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#AE4132;fontColor=#fff;strokeColor=#7a2e23;fontSize=11;" value="LLM API&#xa;(z.B. GPT-4 / Claude / Mistral)&#xa;Zero-Shot oder Few-Shot&#xa;→ Response Parsing → 0/1" vertex="1">
+        <mxCell id="s3_llm" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#AE4132;fontColor=#fff;strokeColor=#7a2e23;fontSize=11;" value="LLM API&lt;br&gt;GPT-4, 500 Samples&lt;div&gt;3 Prompts&lt;/div&gt;" vertex="1">
           <mxGeometry height="80" width="280" x="944" y="205" as="geometry" />
         </mxCell>
         <mxCell id="_8KNrO0H_qVNG3wlR6a1-9" edge="1" parent="1" source="s3_prompt" style="edgeStyle=orthogonalEdgeStyle;" target="s3_llm">
